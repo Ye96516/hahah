@@ -2,7 +2,6 @@ class_name StateBase extends Node
 
 @export var ans:AnimatedSprite2D
 @export var an:AnimationPlayer
-@export var player:Player
 
 var state_machine: StateMachine
 
