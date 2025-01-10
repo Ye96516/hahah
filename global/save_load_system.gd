@@ -31,6 +31,13 @@ func show_all_content():
 	else:
 		printerr("存档未写入任何内容")
 
+##判断是否含特定的键
+func has_key(key:String):
+	_init_file()
+	if key in data.archives_file:
+		return true
+	return false
+
 ##打印出特定的键值对
 func show_certain_content(key:String):
 	_init_file()
