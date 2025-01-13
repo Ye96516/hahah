@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Achieve" load_steps=2 format=3 uid="uid://fdulg0xw80oy"]
+
+[ext_resource type="Script" path="res://data/res_script/achieve.gd" id="1_60exy"]
+
+[resource]
+script = ExtResource("1_60exy")
+infor = {
+"description": "",
+"effect": "",
+"name": "游戏伊始",
+"picture": ""
+}
