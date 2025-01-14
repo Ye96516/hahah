@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://dnvmjwuu7v5sq"]
+[gd_scene load_steps=6 format=3 uid="uid://dnvmjwuu7v5sq"]
 
 [ext_resource type="Script" path="res://scenes/setting/setting.gd" id="1_gcp4l"]
 [ext_resource type="Script" path="res://scenes/setting/resolution.gd" id="2_i80b5"]
 [ext_resource type="Script" path="res://scenes/setting/volume.gd" id="3_gt6wv"]
 [ext_resource type="Script" path="res://scenes/setting/change_key_pos.gd" id="4_8qoxy"]
+[ext_resource type="Script" path="res://scenes/setting/change_button_icon.gd" id="5_gxj7x"]
 
 [node name="Setting" type="Control"]
 layout_mode = 3
@@ -29,7 +30,7 @@ offset_top = 239.0
 offset_right = 576.0
 offset_bottom = 295.0
 max_value = 1.0
-step = 0.05
+step = 0.01
 script = ExtResource("3_gt6wv")
 
 [node name="ChangeKeyPos" type="Node" parent="."]
@@ -40,8 +41,19 @@ offset_left = 345.0
 offset_top = 343.0
 offset_right = 435.0
 offset_bottom = 424.0
+button_mask = 0
 text = "D"
+
+[node name="ChangeButtonIcon" type="Button" parent="."]
+layout_mode = 0
+offset_left = 321.0
+offset_top = 449.0
+offset_right = 457.0
+offset_bottom = 550.0
+text = "改变鼠标光标图像"
+script = ExtResource("5_gxj7x")
 
 [connection signal="item_selected" from="Resolution" to="Resolution" method="_on_resolution_item_selected"]
 [connection signal="value_changed" from="Volume" to="Volume" method="_on_value_changed"]
 [connection signal="pressed" from="ChangeKeyPos/MoveRight" to="ChangeKeyPos" method="_on_move_right_pressed"]
+[connection signal="pressed" from="ChangeButtonIcon" to="ChangeButtonIcon" method="_on_pressed"]

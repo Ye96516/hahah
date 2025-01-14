@@ -1,3 +1,3 @@
 extends Control
 
-var op
+@export var node:Node=Node.new()
