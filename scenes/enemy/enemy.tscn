@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=3 uid="uid://cxbl6v7kxeemd"]
+
+[ext_resource type="Script" path="res://data/custom_node/state_mahchine/StateMachine.gd" id="1_w3js1"]
+[ext_resource type="Script" path="res://scenes/enemy/enemy.gd" id="1_xlbva"]
+[ext_resource type="Texture2D" uid="uid://bvhxhpwx7sekj" path="res://icon.svg" id="3_7cna2"]
+[ext_resource type="Script" path="res://scenes/enemy/track.gd" id="3_x3yau"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kjl6u"]
+radius = 31.0
+
+[node name="Enemy" type="CharacterBody2D" groups=["enemy"]]
+collision_layer = 8
+collision_mask = 3
+script = ExtResource("1_xlbva")
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("current_state")]
+script = ExtResource("1_w3js1")
+current_state = NodePath("Track")
+
+[node name="Track" type="Node" parent="StateMachine"]
+script = ExtResource("3_x3yau")
+
+[node name="Icon" type="Sprite2D" parent="."]
+self_modulate = Color(1, 0.341176, 1, 1)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_7cna2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_kjl6u")

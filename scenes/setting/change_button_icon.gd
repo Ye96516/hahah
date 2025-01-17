@@ -6,15 +6,6 @@ enum mouse_pic{
 }
 var current_pic:int=mouse_pic.normal
 
-func _ready() -> void:
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-
-
 func _on_pressed() -> void:
 	match current_pic:
 		mouse_pic.normal:

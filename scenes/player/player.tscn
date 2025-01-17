@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://db5cx0wekpik6"]
+
+[ext_resource type="Texture2D" uid="uid://bvhxhpwx7sekj" path="res://icon.svg" id="1_2yctf"]
+[ext_resource type="Script" path="res://scenes/player/player.gd" id="1_fhpln"]
+[ext_resource type="Script" path="res://scenes/player/ray_cast_2d.gd" id="3_huqfe"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bu7vi"]
+radius = 61.0082
+
+[node name="Player" type="CharacterBody2D" groups=["player"]]
+collision_mask = 11
+motion_mode = 1
+script = ExtResource("1_fhpln")
+
+[node name="Icon" type="Sprite2D" parent="."]
+texture = ExtResource("1_2yctf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_bu7vi")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+limit_left = 0
+limit_top = 0
+limit_right = 1920
+limit_bottom = 1080
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(-5, 2)
+target_position = Vector2(426, 92)
+collision_mask = 8
+script = ExtResource("3_huqfe")

@@ -20,6 +20,3 @@ func process_update(_delta: float) -> void:
 ## 物理帧触发
 func physical_process_update(_delta: float) -> void:
 	pass
-#hihuihnuiu,,jh
-#hhahah
-#怎么提交啊啊啊啊啊
