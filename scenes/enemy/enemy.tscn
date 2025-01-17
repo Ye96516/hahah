@@ -1,9 +1,23 @@
-[gd_scene load_steps=6 format=3 uid="uid://cxbl6v7kxeemd"]
+[gd_scene load_steps=8 format=3 uid="uid://cxbl6v7kxeemd"]
 
 [ext_resource type="Script" path="res://data/custom_node/state_mahchine/StateMachine.gd" id="1_w3js1"]
 [ext_resource type="Script" path="res://scenes/enemy/enemy.gd" id="1_xlbva"]
+[ext_resource type="Script" path="res://data/res_script/entity_attributes.gd" id="2_0b5gk"]
 [ext_resource type="Texture2D" uid="uid://bvhxhpwx7sekj" path="res://icon.svg" id="3_7cna2"]
 [ext_resource type="Script" path="res://scenes/enemy/track.gd" id="3_x3yau"]
+
+[sub_resource type="Resource" id="Resource_dpt0l"]
+script = ExtResource("2_0b5gk")
+entity = {
+"ap": 10,
+"atk_speed": 1.0,
+"defense": 0,
+"health": 100,
+"name": "enemy",
+"quantity": 1,
+"reload_cd": 0.5,
+"speed": 15000
+}
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_kjl6u"]
 radius = 31.0
@@ -12,6 +26,7 @@ radius = 31.0
 collision_layer = 8
 collision_mask = 3
 script = ExtResource("1_xlbva")
+self_res = SubResource("Resource_dpt0l")
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("current_state")]
 script = ExtResource("1_w3js1")
@@ -27,3 +42,11 @@ texture = ExtResource("3_7cna2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_kjl6u")
+
+[node name="HurtValue" type="Label" parent="."]
+offset_left = -19.0
+offset_top = -59.0
+offset_right = 21.0
+offset_bottom = -36.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]

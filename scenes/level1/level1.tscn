@@ -1,12 +1,53 @@
-[gd_scene load_steps=6 format=3 uid="uid://c2v4ioh2w0jtt"]
+[gd_scene load_steps=11 format=3 uid="uid://c2v4ioh2w0jtt"]
 
 [ext_resource type="PackedScene" uid="uid://bhgvih0djkv32" path="res://scenes/obstacle/obstacle.tscn" id="1_n82hs"]
 [ext_resource type="PackedScene" uid="uid://db5cx0wekpik6" path="res://scenes/player/player.tscn" id="2_2jon6"]
 [ext_resource type="Texture2D" uid="uid://bvhxhpwx7sekj" path="res://icon.svg" id="2_5wjv8"]
 [ext_resource type="PackedScene" uid="uid://cxbl6v7kxeemd" path="res://scenes/enemy/enemy.tscn" id="4_oqw5t"]
+[ext_resource type="Script" path="res://data/res_script/entity_attributes.gd" id="5_dnwgr"]
+[ext_resource type="PackedScene" uid="uid://c5871tfq0rn7x" path="res://scenes/bullet/bullet.tscn" id="6_pnppt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ajp75"]
 size = Vector2(1970, 636.5)
+
+[sub_resource type="Resource" id="Resource_pdl1r"]
+resource_local_to_scene = true
+script = ExtResource("5_dnwgr")
+entity = {
+"ap": 10,
+"atk_speed": 1.0,
+"defense": 0,
+"health": 100,
+"name": "enemy",
+"reload_cd": 0.5,
+"speed": 15000
+}
+
+[sub_resource type="Resource" id="Resource_02dnw"]
+resource_local_to_scene = true
+script = ExtResource("5_dnwgr")
+entity = {
+"ap": 10,
+"atk_speed": 1.0,
+"defense": 0,
+"health": 100,
+"name": "enemy",
+"reload_cd": 0.5,
+"speed": 15000
+}
+
+[sub_resource type="Resource" id="Resource_omgta"]
+resource_local_to_scene = true
+script = ExtResource("5_dnwgr")
+entity = {
+"ap": 10,
+"atk_speed": 1.0,
+"defense": 0,
+"health": 100,
+"name": "enemy",
+"reload_cd": 0.5,
+"speed": 15000
+}
 
 [node name="Level1" type="Node2D"]
 
@@ -43,3 +84,15 @@ collision_mask = 2
 
 [node name="Enemy" parent="Enemy" instance=ExtResource("4_oqw5t")]
 position = Vector2(238, 668)
+self_res = SubResource("Resource_pdl1r")
+
+[node name="Enemy2" parent="Enemy" instance=ExtResource("4_oqw5t")]
+position = Vector2(135, 784)
+self_res = SubResource("Resource_02dnw")
+
+[node name="Enemy3" parent="Enemy" instance=ExtResource("4_oqw5t")]
+position = Vector2(63, 668)
+self_res = SubResource("Resource_omgta")
+
+[node name="Bullet" parent="." instance=ExtResource("6_pnppt")]
+position = Vector2(784, 715)

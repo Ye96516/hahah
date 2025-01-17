@@ -1,8 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://db5cx0wekpik6"]
+[gd_scene load_steps=10 format=3 uid="uid://db5cx0wekpik6"]
 
 [ext_resource type="Texture2D" uid="uid://bvhxhpwx7sekj" path="res://icon.svg" id="1_2yctf"]
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_fhpln"]
+[ext_resource type="Resource" uid="uid://5qru2otu77qx" path="res://scenes/player/data/player.tres" id="2_bvmpp"]
 [ext_resource type="Script" path="res://scenes/player/ray_cast_2d.gd" id="3_huqfe"]
+[ext_resource type="Script" path="res://data/custom_node/state_mahchine/StateMachine.gd" id="4_o5jed"]
+[ext_resource type="Script" path="res://scenes/player/shoot.gd" id="5_74suq"]
+[ext_resource type="Script" path="res://scenes/player/death.gd" id="6_55bke"]
+[ext_resource type="PackedScene" uid="uid://pbpok6cupast" path="res://scenes/soda_can/soda_can.tscn" id="8_2itht"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_bu7vi"]
 radius = 61.0082
@@ -11,6 +16,7 @@ radius = 61.0082
 collision_mask = 11
 motion_mode = 1
 script = ExtResource("1_fhpln")
+self_res = ExtResource("2_bvmpp")
 
 [node name="Icon" type="Sprite2D" parent="."]
 texture = ExtResource("1_2yctf")
@@ -24,9 +30,36 @@ limit_top = 0
 limit_right = 1920
 limit_bottom = 1080
 
-[node name="RayCast2D" type="RayCast2D" parent="."]
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("current_state")]
+script = ExtResource("4_o5jed")
+current_state = NodePath("Shoot")
+
+[node name="Shoot" type="Node" parent="StateMachine"]
+script = ExtResource("5_74suq")
+
+[node name="RayCast2D" type="RayCast2D" parent="StateMachine/Shoot"]
 unique_name_in_owner = true
-position = Vector2(-5, 2)
 target_position = Vector2(426, 92)
 collision_mask = 8
 script = ExtResource("3_huqfe")
+
+[node name="Death" type="Node" parent="StateMachine"]
+script = ExtResource("6_55bke")
+
+[node name="RayCastRemote" type="RemoteTransform2D" parent="."]
+remote_path = NodePath("../StateMachine/Shoot/RayCast2D")
+
+[node name="SodaCan" parent="." instance=ExtResource("8_2itht")]
+position = Vector2(39, 3.00002)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="BulletQuantity" type="Label" parent="CanvasLayer"]
+unique_name_in_owner = true
+z_index = 2
+offset_left = 1685.0
+offset_top = 922.0
+offset_right = 1901.0
+offset_bottom = 1067.0
+theme_override_font_sizes/font_size = 64
+text = "1"
