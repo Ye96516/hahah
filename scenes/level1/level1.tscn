@@ -1,102 +1,73 @@
-[gd_scene load_steps=11 format=3 uid="uid://c2v4ioh2w0jtt"]
+[gd_scene load_steps=12 format=3 uid="uid://c2v4ioh2w0jtt"]
 
 [ext_resource type="PackedScene" uid="uid://bhgvih0djkv32" path="res://scenes/obstacle/obstacle.tscn" id="1_n82hs"]
 [ext_resource type="PackedScene" uid="uid://db5cx0wekpik6" path="res://scenes/player/player.tscn" id="2_2jon6"]
-[ext_resource type="Texture2D" uid="uid://bvhxhpwx7sekj" path="res://icon.svg" id="2_5wjv8"]
-[ext_resource type="PackedScene" uid="uid://cxbl6v7kxeemd" path="res://scenes/enemy/enemy.tscn" id="4_oqw5t"]
-[ext_resource type="Script" path="res://data/res_script/entity_attributes.gd" id="5_dnwgr"]
+[ext_resource type="Texture2D" uid="uid://djx84y4ra573" path="res://art/level/background-middle.png" id="2_i5odb"]
+[ext_resource type="Texture2D" uid="uid://dy76wwgyjkm82" path="res://art/level/background-right.png" id="3_yuda1"]
+[ext_resource type="Script" path="res://scenes/level1/enemys.gd" id="4_0qqb6"]
+[ext_resource type="Texture2D" uid="uid://dr2sqt5v3cqdc" path="res://art/level/wall-c.png" id="4_mpc6m"]
+[ext_resource type="PackedScene" uid="uid://p10m2bbfrblo" path="res://scenes/door/door.tscn" id="5_76cy5"]
+[ext_resource type="Texture2D" uid="uid://n636k3g03ymt" path="res://art/level/Floor-c.png" id="5_xkpd7"]
 [ext_resource type="PackedScene" uid="uid://c5871tfq0rn7x" path="res://scenes/bullet/bullet.tscn" id="6_pnppt"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ajp75"]
-size = Vector2(1970, 636.5)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lqumh"]
+size = Vector2(1928, 621)
 
-[sub_resource type="Resource" id="Resource_s4h6p"]
-resource_local_to_scene = true
-script = ExtResource("5_dnwgr")
-entity = {
-"ap": 10,
-"atk_speed": 1.0,
-"defense": 0,
-"health": 100,
-"name": "enemy",
-"reload_cd": 0.5,
-"speed": 15000
-}
-
-[sub_resource type="Resource" id="Resource_8ikuf"]
-resource_local_to_scene = true
-script = ExtResource("5_dnwgr")
-entity = {
-"ap": 10,
-"atk_speed": 1.0,
-"defense": 0,
-"health": 100,
-"name": "enemy",
-"reload_cd": 0.5,
-"speed": 15000
-}
-
-[sub_resource type="Resource" id="Resource_hlkyl"]
-resource_local_to_scene = true
-script = ExtResource("5_dnwgr")
-entity = {
-"ap": 10,
-"atk_speed": 1.0,
-"defense": 0,
-"health": 100,
-"name": "enemy",
-"reload_cd": 0.5,
-"speed": 15000
-}
+[sub_resource type="CircleShape2D" id="CircleShape2D_hab6q"]
+radius = 132.501
 
 [node name="Level1" type="Node2D"]
 
-[node name="Obstacles" type="Node" parent="."]
+[node name="Obstacles" type="Node2D" parent="."]
+z_index = -1
 
 [node name="Obstacle" parent="Obstacles" instance=ExtResource("1_n82hs")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacles/Obstacle"]
-position = Vector2(988, 211.75)
-shape = SubResource("RectangleShape2D_ajp75")
+position = Vector2(967, 335.5)
+shape = SubResource("RectangleShape2D_lqumh")
 
 [node name="Icon" type="Sprite2D" parent="Obstacles/Obstacle"]
-position = Vector2(977, 228)
-scale = Vector2(15.1563, 4.625)
-texture = ExtResource("2_5wjv8")
+position = Vector2(500.25, 388)
+scale = Vector2(0.516406, 0.714815)
+texture = ExtResource("2_i5odb")
 
-[node name="Obstacle2" parent="Obstacles" instance=ExtResource("1_n82hs")]
-position = Vector2(-26, 957)
+[node name="Background-right" type="Sprite2D" parent="Obstacles/Obstacle"]
+position = Vector2(1437, 387)
+scale = Vector2(0.509375, 0.716667)
+texture = ExtResource("3_yuda1")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacles/Obstacle2"]
-position = Vector2(988, 211.75)
-shape = SubResource("RectangleShape2D_ajp75")
+[node name="Wall-c" type="Sprite2D" parent="Obstacles/Obstacle"]
+z_index = -1
+position = Vector2(79, 462.5)
+scale = Vector2(1.41441, 1.23611)
+texture = ExtResource("4_mpc6m")
 
-[node name="Icon" type="Sprite2D" parent="Obstacles/Obstacle2"]
-position = Vector2(988, 194)
-scale = Vector2(15.1563, 4.625)
-texture = ExtResource("2_5wjv8")
+[node name="Floor-c" type="Sprite2D" parent="Obstacles/Obstacle"]
+position = Vector2(944, 928.5)
+scale = Vector2(1.01875, 1.30488)
+texture = ExtResource("5_xkpd7")
 
 [node name="Player" parent="." instance=ExtResource("2_2jon6")]
-position = Vector2(563, 712)
+position = Vector2(612, 896)
 collision_mask = 2
 
-[node name="Enemy" type="Node" parent="."]
+[node name="Enemys" type="Node2D" parent="." groups=["enemy_manager"]]
+script = ExtResource("4_0qqb6")
 
-[node name="Enemy" parent="Enemy" instance=ExtResource("4_oqw5t")]
-position = Vector2(238, 668)
-self_res = SubResource("Resource_s4h6p")
+[node name="Door" parent="Enemys" node_paths=PackedStringArray("path") instance=ExtResource("5_76cy5")]
+position = Vector2(105, 898)
+path = NodePath("Path")
 
-[node name="Enemy2" parent="Enemy" instance=ExtResource("4_oqw5t")]
-position = Vector2(135, 784)
-self_res = SubResource("Resource_8ikuf")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemys/Door"]
+position = Vector2(-13.5, -63.5)
+shape = SubResource("CircleShape2D_hab6q")
 
-[node name="Enemy3" parent="Enemy" instance=ExtResource("4_oqw5t")]
-visible = false
-position = Vector2(63, 668)
-self_res = SubResource("Resource_hlkyl")
+[node name="Path" type="Line2D" parent="Enemys/Door"]
+points = PackedVector2Array(205, -77, 640, -91)
 
 [node name="Bullet" parent="." instance=ExtResource("6_pnppt")]
-position = Vector2(784, 715)
+position = Vector2(1083, 939)
 attri = {
 "ap": 20,
 "atk_speed": 0.0,

@@ -20,7 +20,7 @@ func _physics_process(delta: float) -> void:
 ## 修改状态
 func change_state(target_state_name: String) -> void:
 	var target_state = get_node(target_state_name)
-	if is_instance_valid(target_state):
+	if not is_instance_valid(target_state):
 		printerr("目标节点不存在，请确认节点名称是否正确！")
 		return
 	current_state.exit()

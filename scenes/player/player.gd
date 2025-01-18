@@ -7,6 +7,8 @@ class_name Player extends CharacterBody2D
 @onready var soda_can: Sprite2D = $Show/SodaCan
 @onready var pause_menu:=preload("res://scenes/pause_menu/pause_menu.tscn")
 @onready var canvas_layer: CanvasLayer = $CanvasLayer
+@onready var health_bar: TextureProgressBar = %HealthBar
+@onready var health:int=self_res.entity["health"]
 
 @export var self_res:EntityAtrributes
 
@@ -14,13 +16,15 @@ var direction:Vector2
 var can_pick:bool
 var bullet:Bullet
 var is_first_scale_change:bool=true
+var is_death:bool
 
 func _ready() -> void:
+	health_bar.value= self_res.entity["health"]
 	pass
 
 func _physics_process(delta: float) -> void:
 	direction = Input.get_vector("move_left","move_right","move_top","move_down")
-	velocity= direction * self_res.entity["speed"]*delta
+	
 	move_and_slide()
 	
 	#拾取逻辑
@@ -40,8 +44,7 @@ func _physics_process(delta: float) -> void:
 	else:
 		handle_show_node_scale(true)
 	
-func on_death():
-	state_machine.change_state("Death")
+	_on_hurt()
 
 func handle_show_node_scale(is_flip:bool):
 	if not is_flip && is_first_scale_change:
@@ -49,7 +52,6 @@ func handle_show_node_scale(is_flip:bool):
 		soda_can.is_flip=false
 		ray_cast_2d.is_flip=false
 		is_first_scale_change=false
-
 	elif is_flip && not is_first_scale_change:
 		show_node.scale.x=-1
 		soda_can.is_flip=true
@@ -61,10 +63,22 @@ func _input(event: InputEvent) -> void:
 		var pause_menu_ins:=pause_menu.instantiate()
 		canvas_layer.call_deferred("add_child",pause_menu_ins)
 		get_tree().paused=!get_tree().paused
-	
 	#加速
 	if event.is_action_pressed("speed_up"):
 		self_res.entity["speed"]*=2
 	if event.is_action_released("speed_up"):
 		self_res.entity["speed"]/=2
 		
+func _on_hurt():
+	#处理受击逻辑
+	if self_res.entity["health"]!=health:
+		health_bar.value=self_res.entity["health"]
+		#判断死亡
+		if self_res.entity["health"]<=0 && not is_death:
+			_on_death()
+		#重置health
+		health=self_res.entity["health"]
+
+func _on_death():
+	state_machine.change_state("Death")
+	is_death=true

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://db5cx0wekpik6"]
+[gd_scene load_steps=12 format=3 uid="uid://db5cx0wekpik6"]
 
 [ext_resource type="Texture2D" uid="uid://bvhxhpwx7sekj" path="res://icon.svg" id="1_2yctf"]
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_fhpln"]
@@ -8,6 +8,8 @@
 [ext_resource type="Script" path="res://scenes/player/shoot.gd" id="5_74suq"]
 [ext_resource type="Script" path="res://scenes/player/death.gd" id="6_55bke"]
 [ext_resource type="PackedScene" uid="uid://pbpok6cupast" path="res://scenes/soda_can/soda_can.tscn" id="8_2itht"]
+[ext_resource type="Texture2D" uid="uid://ba5defoppaobm" path="res://scenes/player/art/HPblack.png" id="9_6eeiw"]
+[ext_resource type="Texture2D" uid="uid://ccy45m0l68y7d" path="res://scenes/player/art/HPred.png" id="10_syh43"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_bu7vi"]
 radius = 61.0082
@@ -60,6 +62,14 @@ script = ExtResource("6_55bke")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+offset_left = 389.0
+offset_top = 21.0
+offset_right = 1878.0
+offset_bottom = 163.0
+texture = ExtResource("9_6eeiw")
+expand_mode = 1
+
 [node name="BulletQuantity" type="Label" parent="CanvasLayer"]
 unique_name_in_owner = true
 z_index = 2
@@ -69,3 +79,14 @@ offset_right = 414.0
 offset_bottom = 256.0
 theme_override_font_sizes/font_size = 64
 text = "1"
+
+[node name="HealthBar" type="TextureProgressBar" parent="CanvasLayer"]
+unique_name_in_owner = true
+offset_left = 441.0
+offset_top = 54.0
+offset_right = 1815.0
+offset_bottom = 129.0
+value = 100.0
+nine_patch_stretch = true
+texture_under = ExtResource("9_6eeiw")
+texture_progress = ExtResource("10_syh43")

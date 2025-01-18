@@ -1,39 +1,169 @@
-[gd_scene load_steps=8 format=3 uid="uid://cxbl6v7kxeemd"]
+[gd_scene load_steps=16 format=3 uid="uid://cxbl6v7kxeemd"]
 
 [ext_resource type="Script" path="res://data/custom_node/state_mahchine/StateMachine.gd" id="1_w3js1"]
 [ext_resource type="Script" path="res://scenes/enemy/enemy.gd" id="1_xlbva"]
 [ext_resource type="Script" path="res://data/res_script/entity_attributes.gd" id="2_0b5gk"]
 [ext_resource type="Texture2D" uid="uid://bvhxhpwx7sekj" path="res://icon.svg" id="3_7cna2"]
 [ext_resource type="Script" path="res://scenes/enemy/track.gd" id="3_x3yau"]
+[ext_resource type="Script" path="res://scenes/enemy/patrol.gd" id="5_mtt7j"]
+[ext_resource type="Script" path="res://scenes/enemy/enemy_checker_area.gd" id="6_wrjjd"]
+[ext_resource type="Script" path="res://scenes/enemy/enemy_atk_area.gd" id="7_lbnwq"]
 
-[sub_resource type="Resource" id="Resource_dpt0l"]
+[sub_resource type="Resource" id="Resource_htrfd"]
+resource_local_to_scene = true
 script = ExtResource("2_0b5gk")
 entity = {
 "ap": 10,
 "atk_speed": 1.0,
 "defense": 0,
 "health": 100,
+"max_quantity": 1,
 "name": "enemy",
 "quantity": 1,
 "reload_cd": 0.5,
 "speed": 15000
 }
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_7faob"]
+radius = 138.033
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_kjl6u"]
 radius = 31.0
+
+[sub_resource type="Animation" id="Animation_j7y64"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HurtValue:size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(40, 50)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HurtValue:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-12, -76)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("HurtValue:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1.28513, 1.28513)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("HurtValue:self_modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_oijnn"]
+resource_name = "popup"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HurtValue:size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(40, 50), Vector2(40, 50)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HurtValue:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.366667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(-12, -76), Vector2(-13, -97), Vector2(-18, -108)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("HurtValue:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.366667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.28513, 1.28513), Vector2(1.59906, 1.59906)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("HurtValue:self_modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.366667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cts7i"]
+_data = {
+"RESET": SubResource("Animation_j7y64"),
+"popup": SubResource("Animation_oijnn")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_n1enr"]
+radius = 51.0392
 
 [node name="Enemy" type="CharacterBody2D" groups=["enemy"]]
 collision_layer = 8
 collision_mask = 3
 script = ExtResource("1_xlbva")
-self_res = SubResource("Resource_dpt0l")
+self_res = SubResource("Resource_htrfd")
+
+[node name="EnemyCheckerArea" type="Area2D" parent="."]
+script = ExtResource("6_wrjjd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyCheckerArea"]
+shape = SubResource("CircleShape2D_7faob")
+debug_color = Color(0.76985, 0.33772, 0.739987, 0.42)
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("current_state")]
 script = ExtResource("1_w3js1")
-current_state = NodePath("Track")
+current_state = NodePath("Patrol")
 
 [node name="Track" type="Node" parent="StateMachine"]
 script = ExtResource("3_x3yau")
+
+[node name="Patrol" type="Node" parent="StateMachine"]
+script = ExtResource("5_mtt7j")
 
 [node name="Icon" type="Sprite2D" parent="."]
 self_modulate = Color(1, 0.341176, 1, 1)
@@ -44,9 +174,30 @@ texture = ExtResource("3_7cna2")
 shape = SubResource("CircleShape2D_kjl6u")
 
 [node name="HurtValue" type="Label" parent="."]
-offset_left = -19.0
-offset_top = -59.0
-offset_right = 21.0
-offset_bottom = -36.0
+offset_left = -12.0
+offset_top = -76.0
+offset_right = 28.0
+offset_bottom = -26.0
+scale = Vector2(1.28513, 1.28513)
+theme_override_font_sizes/font_size = 36
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_cts7i")
+}
+
+[node name="EnemyAtkArea" type="Area2D" parent="."]
+collision_layer = 8
+script = ExtResource("7_lbnwq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyAtkArea"]
+shape = SubResource("CircleShape2D_n1enr")
+debug_color = Color(0.799326, 0.404032, 0.328724, 0.42)
+
+[node name="Timer" type="Timer" parent="EnemyAtkArea"]
+
+[connection signal="body_entered" from="EnemyCheckerArea" to="EnemyCheckerArea" method="_on_body_entered"]
+[connection signal="body_exited" from="EnemyCheckerArea" to="EnemyCheckerArea" method="_on_body_exited"]
+[connection signal="body_entered" from="EnemyAtkArea" to="EnemyAtkArea" method="_on_body_entered"]
+[connection signal="body_exited" from="EnemyAtkArea" to="EnemyAtkArea" method="_on_body_exited"]
+[connection signal="timeout" from="EnemyAtkArea/Timer" to="EnemyAtkArea" method="_on_timer_timeout"]

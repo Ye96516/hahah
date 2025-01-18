@@ -14,7 +14,6 @@ func _ready() -> void:
 	pass
 
 func _on_move_right_pressed() -> void:
-	print(666)
 	current_action=actions.move_right
 
 func _input(event: InputEvent) -> void:

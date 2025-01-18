@@ -1,13 +1,22 @@
-[gd_scene load_steps=2 format=3 uid="uid://p10m2bbfrblo"]
+[gd_scene load_steps=3 format=3 uid="uid://p10m2bbfrblo"]
 
 [ext_resource type="Script" path="res://scenes/door/door.gd" id="1_0ww22"]
+[ext_resource type="Texture2D" uid="uid://c74hi58aqhlrg" path="res://art/level/door-1.png" id="2_uru8m"]
 
 [node name="Door" type="Area2D"]
+collision_layer = 4
 script = ExtResource("1_0ww22")
+follow_x = true
 
 [node name="DoorSprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_uru8m")
+offset = Vector2(0, -240)
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
 
+[node name="Camera2D" type="Camera2D" parent="."]
+enabled = false
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
