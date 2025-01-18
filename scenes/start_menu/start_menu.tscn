@@ -1,0 +1,56 @@
+[gd_scene load_steps=5 format=3 uid="uid://b5r0wi2cn0gub"]
+
+[ext_resource type="Script" path="res://start_game.gd" id="1_dc58d"]
+[ext_resource type="Script" path="res://scenes/start_menu/setting.gd" id="2_2t1lu"]
+[ext_resource type="Script" path="res://scenes/start_menu/exit.gd" id="3_5msls"]
+
+[sub_resource type="Theme" id="Theme_6gsph"]
+Button/font_sizes/font_size = 64
+
+[node name="StartMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_6gsph")
+
+[node name="Main" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -373.0
+offset_top = 91.0
+offset_right = 409.0
+offset_bottom = 939.0
+grow_horizontal = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Main"]
+layout_mode = 2
+
+[node name="StartGame" type="Button" parent="Main/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "开始游戏"
+script = ExtResource("1_dc58d")
+
+[node name="Setting" type="Button" parent="Main/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "设置"
+script = ExtResource("2_2t1lu")
+
+[node name="Exit" type="Button" parent="Main/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "退出游戏"
+script = ExtResource("3_5msls")
+
+[node name="Button4" type="Button" parent="Main/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[connection signal="pressed" from="Main/VBoxContainer/StartGame" to="Main/VBoxContainer/StartGame" method="_on_pressed"]
+[connection signal="pressed" from="Main/VBoxContainer/Setting" to="Main/VBoxContainer/Setting" method="_on_pressed"]

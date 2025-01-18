@@ -10,7 +10,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ajp75"]
 size = Vector2(1970, 636.5)
 
-[sub_resource type="Resource" id="Resource_pdl1r"]
+[sub_resource type="Resource" id="Resource_vg08l"]
 resource_local_to_scene = true
 script = ExtResource("5_dnwgr")
 entity = {
@@ -23,7 +23,7 @@ entity = {
 "speed": 15000
 }
 
-[sub_resource type="Resource" id="Resource_02dnw"]
+[sub_resource type="Resource" id="Resource_yb128"]
 resource_local_to_scene = true
 script = ExtResource("5_dnwgr")
 entity = {
@@ -36,7 +36,7 @@ entity = {
 "speed": 15000
 }
 
-[sub_resource type="Resource" id="Resource_omgta"]
+[sub_resource type="Resource" id="Resource_4grus"]
 resource_local_to_scene = true
 script = ExtResource("5_dnwgr")
 entity = {
@@ -84,15 +84,22 @@ collision_mask = 2
 
 [node name="Enemy" parent="Enemy" instance=ExtResource("4_oqw5t")]
 position = Vector2(238, 668)
-self_res = SubResource("Resource_pdl1r")
+self_res = SubResource("Resource_vg08l")
 
 [node name="Enemy2" parent="Enemy" instance=ExtResource("4_oqw5t")]
 position = Vector2(135, 784)
-self_res = SubResource("Resource_02dnw")
+self_res = SubResource("Resource_yb128")
 
 [node name="Enemy3" parent="Enemy" instance=ExtResource("4_oqw5t")]
+visible = false
 position = Vector2(63, 668)
-self_res = SubResource("Resource_omgta")
+self_res = SubResource("Resource_4grus")
 
 [node name="Bullet" parent="." instance=ExtResource("6_pnppt")]
 position = Vector2(784, 715)
+attri = {
+"ap": 20,
+"atk_speed": 0.0,
+"max_quantity": 10,
+"reload_cd": 0.0
+}

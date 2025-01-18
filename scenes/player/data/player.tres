@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="EntityAtrributes" load_steps=2 format=3 uid="uid://5qru2otu77qx"]
+[gd_resource type="Resource" script_class="EntityAtrributes" load_steps=2 format=3 uid="uid://cm0hr7gltewb0"]
 
 [ext_resource type="Script" path="res://data/res_script/entity_attributes.gd" id="1_uhmyd"]
 
@@ -6,9 +6,10 @@
 script = ExtResource("1_uhmyd")
 entity = {
 "ap": 10,
-"atk_speed": 1.0,
+"atk_speed": 0.2,
 "defense": 0,
 "health": 100,
+"max_quantity": 5,
 "name": "player",
 "quantity": 5,
 "reload_cd": 0.5,

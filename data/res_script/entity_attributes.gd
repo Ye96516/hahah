@@ -5,6 +5,7 @@ class_name EntityAtrributes extends Resource
 	"speed"=30000,
 	"health"=100,
 	"ap"=10,
+	"max_quantity"=1,
 	"quantity"=1,
 	"defense"=0,
 	"atk_speed"=1.0,

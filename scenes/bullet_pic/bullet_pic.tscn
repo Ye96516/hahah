@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://dgxc7hlu7ihhm"]
+
+[ext_resource type="Texture2D" uid="uid://bvhxhpwx7sekj" path="res://icon.svg" id="1_cwnml"]
+[ext_resource type="Script" path="res://scenes/bullet_pic/bullet_pic.gd" id="2_8cy1f"]
+
+[node name="BulletPic" type="Sprite2D"]
+scale = Vector2(0.75, 0.21875)
+texture = ExtResource("1_cwnml")
+script = ExtResource("2_8cy1f")
