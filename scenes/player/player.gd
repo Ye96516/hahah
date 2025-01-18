@@ -6,6 +6,7 @@ class_name Player extends CharacterBody2D
 @onready var show_node: Node2D = $Show
 @onready var soda_can: Sprite2D = $Show/SodaCan
 @onready var pause_menu:=preload("res://scenes/pause_menu/pause_menu.tscn")
+@onready var canvas_layer: CanvasLayer = $CanvasLayer
 
 @export var self_res:EntityAtrributes
 
@@ -58,7 +59,7 @@ func handle_show_node_scale(is_flip:bool):
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("pause"):
 		var pause_menu_ins:=pause_menu.instantiate()
-		get_parent().call_deferred("add_child",pause_menu_ins)
+		canvas_layer.call_deferred("add_child",pause_menu_ins)
 		get_tree().paused=!get_tree().paused
 	
 	#加速

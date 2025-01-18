@@ -54,3 +54,4 @@ size_flags_vertical = 3
 
 [connection signal="pressed" from="Main/VBoxContainer/StartGame" to="Main/VBoxContainer/StartGame" method="_on_pressed"]
 [connection signal="pressed" from="Main/VBoxContainer/Setting" to="Main/VBoxContainer/Setting" method="_on_pressed"]
+[connection signal="pressed" from="Main/VBoxContainer/Exit" to="Main/VBoxContainer/Exit" method="_on_pressed"]
