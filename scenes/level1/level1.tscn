@@ -64,7 +64,7 @@ position = Vector2(-13.5, -63.5)
 shape = SubResource("CircleShape2D_hab6q")
 
 [node name="Path" type="Line2D" parent="Enemys/Door"]
-points = PackedVector2Array(205, -77, 640, -91)
+points = PackedVector2Array(205, -77, 654, -83)
 
 [node name="Bullet" parent="." instance=ExtResource("6_pnppt")]
 position = Vector2(1083, 939)

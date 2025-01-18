@@ -4,6 +4,7 @@ signal enemy_death(node:CharacterBody2D)
 
 @export var  self_res:EntityAtrributes
 
+const HURT = preload("res://scenes/player/art/sound/hurt.ogg")
 var direction:Vector2
 var is_death:bool
 var p1:Vector2
@@ -24,8 +25,8 @@ func _physics_process(delta: float) -> void:
 	
 	#处理受击逻辑
 	if self_res.entity["health"]!=health:
+		AudioPlayer.play(HURT)
 		velocity=-direction*self_res.entity["speed"]*delta*2
-		#print(self.name," ",str(self_res.entity["health"]))
 		#显示文字
 		hurt_value.text=str(health-self_res.entity["health"])
 		animation_player.play("popup")

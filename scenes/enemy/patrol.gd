@@ -8,7 +8,6 @@ var dir:Vector2
 var is_right:bool
 
 func enter():
-	print(owner.p2,owner.p1)
 	pass
 
 func exit() -> void:

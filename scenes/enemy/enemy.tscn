@@ -9,18 +9,20 @@
 [ext_resource type="Script" path="res://scenes/enemy/enemy_checker_area.gd" id="6_wrjjd"]
 [ext_resource type="Script" path="res://scenes/enemy/enemy_atk_area.gd" id="7_lbnwq"]
 
-[sub_resource type="Resource" id="Resource_htrfd"]
-resource_local_to_scene = true
+[sub_resource type="Resource" id="Resource_44uaf"]
 script = ExtResource("2_0b5gk")
 entity = {
 "ap": 10,
 "atk_speed": 1.0,
+"crit_magnification": 1.0,
+"crit_rate": 0.1,
 "defense": 0,
 "health": 100,
 "max_quantity": 1,
 "name": "enemy",
 "quantity": 1,
 "reload_cd": 0.5,
+"shoot_length": 500,
 "speed": 15000
 }
 
@@ -83,7 +85,7 @@ tracks/3/keys = {
 
 [sub_resource type="Animation" id="Animation_oijnn"]
 resource_name = "popup"
-length = 0.4
+length = 0.6
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -91,7 +93,7 @@ tracks/0/path = NodePath("HurtValue:size")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2),
+"times": PackedFloat32Array(0, 0.3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(40, 50), Vector2(40, 50)]
@@ -103,10 +105,10 @@ tracks/1/path = NodePath("HurtValue:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.366667),
+"times": PackedFloat32Array(0, 0.3, 0.533333),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector2(-12, -76), Vector2(-13, -97), Vector2(-18, -108)]
+"values": [Vector2(-22, -81), Vector2(-60, -179), Vector2(-77, -302)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -115,10 +117,10 @@ tracks/2/path = NodePath("HurtValue:scale")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.366667),
+"times": PackedFloat32Array(0, 0.3, 0.533333),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector2(1, 1), Vector2(1.28513, 1.28513), Vector2(1.59906, 1.59906)]
+"values": [Vector2(1, 1), Vector2(3, 3), Vector2(4, 4)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -127,7 +129,7 @@ tracks/3/path = NodePath("HurtValue:self_modulate")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.366667),
+"times": PackedFloat32Array(0.233333, 0.533333),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
@@ -146,7 +148,7 @@ radius = 51.0392
 collision_layer = 8
 collision_mask = 3
 script = ExtResource("1_xlbva")
-self_res = SubResource("Resource_htrfd")
+self_res = SubResource("Resource_44uaf")
 
 [node name="EnemyCheckerArea" type="Area2D" parent="."]
 script = ExtResource("6_wrjjd")
@@ -174,12 +176,16 @@ texture = ExtResource("3_7cna2")
 shape = SubResource("CircleShape2D_kjl6u")
 
 [node name="HurtValue" type="Label" parent="."]
-offset_left = -12.0
-offset_top = -76.0
-offset_right = 28.0
-offset_bottom = -26.0
+unique_name_in_owner = true
+offset_left = -22.0
+offset_top = -81.0
+offset_right = 18.0
+offset_bottom = -31.0
 scale = Vector2(1.28513, 1.28513)
 theme_override_font_sizes/font_size = 36
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

@@ -24,7 +24,6 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	direction = Input.get_vector("move_left","move_right","move_top","move_down")
-	
 	move_and_slide()
 	
 	#拾取逻辑

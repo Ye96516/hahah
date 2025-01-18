@@ -35,6 +35,7 @@ grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_tgfxt")
 
 [node name="Resolution" type="OptionButton" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 866.0
 offset_top = 268.0
