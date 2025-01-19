@@ -9,9 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://p10m2bbfrblo" path="res://scenes/door/door.tscn" id="5_76cy5"]
 [ext_resource type="Texture2D" uid="uid://n636k3g03ymt" path="res://art/level/Floor-c.png" id="5_xkpd7"]
 [ext_resource type="PackedScene" uid="uid://c5871tfq0rn7x" path="res://scenes/bullet/bullet.tscn" id="6_pnppt"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_lqumh"]
-size = Vector2(1928, 744)
+[ext_resource type="PackedScene" uid="uid://b5r0wi2cn0gub" path="res://scenes/start_menu/start_menu.tscn" id="9_k7am4"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hab6q"]
 radius = 132.501
@@ -22,11 +20,6 @@ radius = 132.501
 z_index = -1
 
 [node name="Obstacle" parent="Obstacles" instance=ExtResource("1_n82hs")]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacles/Obstacle"]
-visible = false
-position = Vector2(967, 397)
-shape = SubResource("RectangleShape2D_lqumh")
 
 [node name="Icon" type="Sprite2D" parent="Obstacles/Obstacle"]
 z_index = -3
@@ -50,6 +43,10 @@ position = Vector2(925, 928.5)
 scale = Vector2(1.03854, 1.30488)
 texture = ExtResource("5_xkpd7")
 
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Obstacles/Obstacle"]
+rotation = 0.00297871
+polygon = PackedVector2Array(160.284, 766.526, -67.7708, 1084.21, -78.0145, -4.76764, 2821.01, -2.40296, 2827.82, 1277.58, -89.169, 1286.27, -65.7827, 1080.2, 2286.27, 1093.19, 2334.29, 764.05)
+
 [node name="Player" parent="." instance=ExtResource("2_2jon6")]
 position = Vector2(612, 896)
 collision_mask = 2
@@ -59,9 +56,11 @@ script = ExtResource("4_0qqb6")
 
 [node name="Door" parent="Enemys" node_paths=PackedStringArray("path") instance=ExtResource("5_76cy5")]
 position = Vector2(76, 950)
+wave = 1
+target_secene = ExtResource("9_k7am4")
 max_spwan_time = 2.0
+max_spwan_number = 2
 path = NodePath("Path")
-enemy_s = "2"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Enemys/Door"]
 position = Vector2(-13.5, -63.5)
@@ -73,11 +72,11 @@ points = PackedVector2Array(205, -77, 654, -83)
 [node name="Bullet" parent="." instance=ExtResource("6_pnppt")]
 position = Vector2(942, 918)
 attri = {
-"ap": 50,
+"ap": 1000,
 "atk_speed": 1.0,
 "boom_ap": 0,
 "crit_magnification": 1.0,
-"crit_rate": 1.0,
+"crit_rate": 0.5,
 "hitted_cold": false,
 "max_quantity": 5,
 "reload_cd": 2.0

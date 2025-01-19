@@ -11,6 +11,7 @@ var cool_slow:bool
 @onready var bullet_pic:=preload("res://scenes/bullet_pic/bullet_pic.tscn")
 @onready var bullet_quantity: Label = %BulletQuantity
 @onready var reload_cd: Timer = $"../ReloadCD"
+@onready var soda_can:  = %"SodaCan"
 
 func _ready() -> void:
 	bullet_quantity.text=str(owner.self_res.entity["quantity"])
@@ -67,7 +68,8 @@ func raycast_shoot():
 	var mouse_pos:Vector2=get_viewport().get_mouse_position()
 	var local_mouse_pos:Vector2=self.to_local(mouse_pos).normalized()
 	var bp_ins:=bullet_pic.instantiate()
-
+	#播放射击动画
+	soda_can.shoot_anim()
 	#设置子弹初始位置及翻转对应
 	bp_ins.global_position=owner.global_position
 	if not is_flip:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://db5cx0wekpik6"]
+[gd_scene load_steps=24 format=3 uid="uid://db5cx0wekpik6"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_fhpln"]
 [ext_resource type="Script" path="res://data/res_script/entity_attributes.gd" id="2_f7bwx"]
@@ -50,6 +50,18 @@ shader = ExtResource("11_e4xp3")
 shader_parameter/outline_color = Color(1, 0.24, 0.24, 1)
 shader_parameter/outline_width = 10.0
 
+[sub_resource type="Animation" id="Animation_new6v"]
+resource_name = "shoot"
+
+[sub_resource type="Animation" id="Animation_qr628"]
+length = 0.001
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hsa0c"]
+_data = {
+"RESET": SubResource("Animation_qr628"),
+"shoot": SubResource("Animation_new6v")
+}
+
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 z_index = 1
 collision_mask = 11
@@ -64,7 +76,8 @@ texture = ExtResource("3_xawkd")
 offset = Vector2(0, -140)
 
 [node name="SodaCan" parent="Show" instance=ExtResource("8_2itht")]
-position = Vector2(39, 3.00002)
+unique_name_in_owner = true
+position = Vector2(106, -92)
 
 [node name="Camera2D" type="Camera2D" parent="Show"]
 limit_left = 0
@@ -86,6 +99,7 @@ shape = SubResource("CircleShape2D_qv4pp")
 debug_color = Color(0.785695, 0.414608, 0.340702, 0.42)
 
 [node name="Pop" type="Sprite2D" parent="Show/BoomArea"]
+visible = false
 position = Vector2(-2, -8)
 scale = Vector2(0.6, 0.6)
 texture = ExtResource("6_toqel")
@@ -157,5 +171,10 @@ texture = ExtResource("12_bxwfx")
 [node name="Head" type="Sprite2D" parent="CanvasLayer"]
 position = Vector2(261, 177)
 texture = ExtResource("14_jahqy")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_hsa0c")
+}
 
 [connection signal="body_entered" from="Show/BoomArea" to="Show/BoomArea" method="_on_body_entered"]

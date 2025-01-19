@@ -13,7 +13,8 @@ config_version=5
 config/name="hahahaha"
 run/main_scene="res://scenes/start_menu/start_menu.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
-config/icon="res://icon.svg"
+boot_splash/image="res://art/GGJ素材/场景/wall.png"
+config/icon="res://art/GGJ素材/场景/head.png"
 
 [autoload]
 

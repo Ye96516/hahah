@@ -43,7 +43,10 @@ func _ready() -> void:
 		var curr_number=randi_range(1,max_spwan_number)
 		enemy_wave.append(curr_number)
 		final_number+=curr_number
-
+	print(final_number)
+	if get_parent() is EnemyManager:
+		get_parent().enemy_quantity+=final_number
+		
 
 func _physics_process(delta: float) -> void:
 	if can_spawn && is_first:
@@ -63,9 +66,6 @@ func _physics_process(delta: float) -> void:
 					"3":
 						enemy_ins.current_enemy="enemy3"
 				
-				if get_parent() is EnemyManager:
-					get_parent().enemys.append(enemy_ins)
-					get_parent().enemy_quantity+=1
 				if follow_x:
 					enemy_ins.position+=Vector2(randf_range(-x_length,x_length),0)
 				else:
@@ -74,7 +74,6 @@ func _physics_process(delta: float) -> void:
 					enemy_ins.p1=path.points[0]
 					enemy_ins.p2=path.points[1]
 				add_child(enemy_ins)
-				print(enemy_ins.self_res.entity["name"])
 			timer.wait_time=time[number]
 			number+=1
 			timer.start()

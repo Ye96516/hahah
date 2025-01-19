@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dnvmjwuu7v5sq"]
+[gd_scene load_steps=17 format=3 uid="uid://dnvmjwuu7v5sq"]
 
 [ext_resource type="Script" path="res://scenes/setting/setting.gd" id="1_gcp4l"]
 [ext_resource type="Texture2D" uid="uid://ck7x36ij63siu" path="res://art/GGJ素材/场景/地板/Floor-middle-noth.png" id="1_licib"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://scenes/setting/change_button_icon.gd" id="5_gxj7x"]
 [ext_resource type="Script" path="res://data/custom_node/UI_hover.gd" id="6_t78cv"]
 [ext_resource type="Script" path="res://scenes/setting/exit.gd" id="7_ed8at"]
+[ext_resource type="Texture2D" uid="uid://d4h724b5e2age" path="res://art/GGJ素材/设置界面及所需按钮/Back.png" id="8_l3mji"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_2j47m"]
 texture = ExtResource("1_licib")
@@ -17,6 +18,18 @@ texture = ExtResource("1_licib")
 Button/font_sizes/font_size = 64
 Button/styles/normal = SubResource("StyleBoxTexture_2j47m")
 Label/font_sizes/font_size = 64
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_214h3"]
+texture = ExtResource("8_l3mji")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4arqo"]
+texture = ExtResource("8_l3mji")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_2lne0"]
+texture = ExtResource("8_l3mji")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_s4bjf"]
+texture = ExtResource("8_l3mji")
 
 [node name="Setting" type="Control"]
 z_index = 4
@@ -43,10 +56,10 @@ metadata/_edit_lock_ = true
 
 [node name="ChangeRLabel" type="Label" parent="."]
 layout_mode = 0
-offset_left = 491.0
-offset_top = 257.0
-offset_right = 875.0
-offset_bottom = 373.0
+offset_left = 611.0
+offset_top = 411.0
+offset_right = 995.0
+offset_bottom = 527.0
 text = "分辨率调节："
 
 [node name="Resolution" type="OptionButton" parent="ChangeRLabel"]
@@ -58,6 +71,7 @@ offset_bottom = 78.0
 script = ExtResource("2_i80b5")
 
 [node name="ChangeKeyPos" type="Control" parent="."]
+visible = false
 anchors_preset = 0
 script = ExtResource("4_8qoxy")
 
@@ -144,10 +158,10 @@ script = ExtResource("6_t78cv")
 
 [node name="ChangeButtonIcon" type="Button" parent="."]
 layout_mode = 0
-offset_left = 1231.0
-offset_top = 666.0
-offset_right = 1743.0
-offset_bottom = 767.0
+offset_left = 637.0
+offset_top = 805.0
+offset_right = 1149.0
+offset_bottom = 906.0
 text = "改变鼠标光标图像"
 script = ExtResource("5_gxj7x")
 
@@ -155,19 +169,27 @@ script = ExtResource("5_gxj7x")
 script = ExtResource("6_t78cv")
 anim_type = 3
 
-[node name="Exit" type="Button" parent="."]
+[node name="Back" type="Button" parent="."]
 layout_mode = 0
 offset_left = 189.0
 offset_top = 485.0
-offset_right = 475.0
-offset_bottom = 721.0
-text = "返回"
+offset_right = 552.0
+offset_bottom = 657.0
+theme_override_styles/focus = SubResource("StyleBoxTexture_214h3")
+theme_override_styles/hover = SubResource("StyleBoxTexture_4arqo")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_2lne0")
+theme_override_styles/normal = SubResource("StyleBoxTexture_s4bjf")
 script = ExtResource("7_ed8at")
+
+[node name="UIHover2" type="Node" parent="Back"]
+script = ExtResource("6_t78cv")
 
 [node name="AboutVolume" type="Control" parent="."]
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = 116.0
+offset_top = 236.0
+offset_right = 156.0
+offset_bottom = 276.0
 
 [node name="Label" type="Label" parent="AboutVolume"]
 layout_mode = 0
@@ -192,5 +214,5 @@ script = ExtResource("3_gt6wv")
 [connection signal="pressed" from="ChangeKeyPos/MoveRightLabel/MoveRight" to="ChangeKeyPos" method="_on_move_right_pressed"]
 [connection signal="pressed" from="ChangeKeyPos/MoveTopLabel/MoveTop" to="ChangeKeyPos" method="_on_move_right_pressed"]
 [connection signal="pressed" from="ChangeButtonIcon" to="ChangeButtonIcon" method="_on_pressed"]
-[connection signal="pressed" from="Exit" to="Exit" method="_on_pressed"]
+[connection signal="pressed" from="Back" to="Back" method="_on_pressed"]
 [connection signal="value_changed" from="AboutVolume/Volume" to="AboutVolume/Volume" method="_on_value_changed"]

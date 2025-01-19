@@ -1,12 +1,47 @@
-[gd_scene load_steps=6 format=3 uid="uid://dk657jr743br8"]
+[gd_scene load_steps=21 format=3 uid="uid://dk657jr743br8"]
 
 [ext_resource type="Script" path="res://scenes/pause_menu/home.gd" id="1_l21ax"]
+[ext_resource type="Texture2D" uid="uid://b6pgh6sx853mq" path="res://art/GGJ素材/设置界面及所需按钮/menu.png" id="2_0agfc"]
 [ext_resource type="Script" path="res://scenes/pause_menu/setting.gd" id="2_dpxch"]
 [ext_resource type="PackedScene" uid="uid://dnvmjwuu7v5sq" path="res://scenes/setting/setting.tscn" id="3_2m84y"]
 [ext_resource type="Script" path="res://scenes/pause_menu/exit.gd" id="3_j0mqh"]
+[ext_resource type="Texture2D" uid="uid://dla6oaorjet4o" path="res://art/GGJ素材/设置界面及所需按钮/Back_.png" id="3_mvqx2"]
+[ext_resource type="Script" path="res://data/custom_node/UI_hover.gd" id="5_lgq2j"]
+[ext_resource type="Texture2D" uid="uid://ustt737m28je" path="res://art/GGJ素材/设置界面及所需按钮/Setting.png" id="6_diulm"]
+[ext_resource type="Texture2D" uid="uid://bg0rusj01hp3i" path="res://art/GGJ素材/设置界面及所需按钮/Exit.png" id="7_g7qnp"]
 
 [sub_resource type="Theme" id="Theme_q7h5n"]
 Button/font_sizes/font_size = 64
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ypge8"]
+texture = ExtResource("2_0agfc")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7ujtq"]
+texture = ExtResource("3_mvqx2")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_l7wg1"]
+texture = ExtResource("3_mvqx2")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7mnt3"]
+texture = ExtResource("3_mvqx2")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vh6fb"]
+texture = ExtResource("3_mvqx2")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5k7ki"]
+texture = ExtResource("6_diulm")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3dh60"]
+texture = ExtResource("7_g7qnp")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_oplmp"]
+texture = ExtResource("7_g7qnp")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_enkq1"]
+texture = ExtResource("7_g7qnp")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_wblyu"]
+texture = ExtResource("7_g7qnp")
 
 [node name="PauseMenu" type="Control"]
 process_mode = 3
@@ -19,43 +54,68 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource("Theme_q7h5n")
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -386.0
-offset_top = 81.0
-offset_right = 386.0
-offset_bottom = 959.0
-grow_horizontal = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
-layout_mode = 2
-
-[node name="Home" type="Button" parent="PanelContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-text = "返回主页"
-script = ExtResource("1_l21ax")
-
-[node name="Setting" type="Button" parent="PanelContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-text = "设置"
-script = ExtResource("2_dpxch")
-
-[node name="Exit" type="Button" parent="PanelContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-text = "退出菜单"
-script = ExtResource("3_j0mqh")
-
 [node name="Setting" parent="." instance=ExtResource("3_2m84y")]
 unique_name_in_owner = true
 visible = false
 layout_mode = 1
 
-[connection signal="pressed" from="PanelContainer/VBoxContainer/Home" to="PanelContainer/VBoxContainer/Home" method="_on_pressed"]
-[connection signal="pressed" from="PanelContainer/VBoxContainer/Setting" to="PanelContainer/VBoxContainer/Setting" method="_on_pressed"]
-[connection signal="pressed" from="PanelContainer/VBoxContainer/Exit" to="PanelContainer/VBoxContainer/Exit" method="_on_pressed"]
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 560.0
+offset_top = 6.0
+offset_right = 1344.0
+offset_bottom = 1030.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_ypge8")
+
+[node name="Exit" type="Button" parent="."]
+layout_mode = 2
+offset_left = 605.0
+offset_top = 88.0
+offset_right = 1305.0
+offset_bottom = 338.0
+size_flags_vertical = 3
+theme_override_styles/focus = SubResource("StyleBoxTexture_7ujtq")
+theme_override_styles/hover = SubResource("StyleBoxTexture_l7wg1")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_7mnt3")
+theme_override_styles/normal = SubResource("StyleBoxTexture_vh6fb")
+script = ExtResource("1_l21ax")
+
+[node name="UIHover" type="Node" parent="Exit"]
+script = ExtResource("5_lgq2j")
+
+[node name="Setting2" type="Button" parent="."]
+layout_mode = 2
+offset_left = 576.0
+offset_top = 382.0
+offset_right = 1376.0
+offset_bottom = 632.0
+size_flags_vertical = 3
+theme_override_styles/focus = SubResource("StyleBoxTexture_5k7ki")
+theme_override_styles/disabled = SubResource("StyleBoxTexture_5k7ki")
+theme_override_styles/hover = SubResource("StyleBoxTexture_5k7ki")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_5k7ki")
+theme_override_styles/normal = SubResource("StyleBoxTexture_5k7ki")
+script = ExtResource("2_dpxch")
+
+[node name="UIHover" type="Node" parent="Setting2"]
+script = ExtResource("5_lgq2j")
+
+[node name="Back" type="Button" parent="."]
+layout_mode = 2
+offset_left = 605.0
+offset_top = 676.0
+offset_right = 1305.0
+offset_bottom = 926.0
+size_flags_vertical = 3
+theme_override_styles/focus = SubResource("StyleBoxTexture_3dh60")
+theme_override_styles/hover = SubResource("StyleBoxTexture_oplmp")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_enkq1")
+theme_override_styles/normal = SubResource("StyleBoxTexture_wblyu")
+script = ExtResource("3_j0mqh")
+
+[node name="UIHover" type="Node" parent="Back"]
+script = ExtResource("5_lgq2j")
+
+[connection signal="pressed" from="Exit" to="Exit" method="_on_pressed"]
+[connection signal="pressed" from="Setting2" to="Setting2" method="_on_pressed"]
+[connection signal="pressed" from="Back" to="Back" method="_on_pressed"]
