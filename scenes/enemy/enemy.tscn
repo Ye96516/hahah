@@ -1,32 +1,37 @@
-[gd_scene load_steps=16 format=3 uid="uid://cxbl6v7kxeemd"]
+[gd_scene load_steps=18 format=3 uid="uid://cxbl6v7kxeemd"]
 
 [ext_resource type="Script" path="res://data/custom_node/state_mahchine/StateMachine.gd" id="1_w3js1"]
 [ext_resource type="Script" path="res://scenes/enemy/enemy.gd" id="1_xlbva"]
 [ext_resource type="Script" path="res://data/res_script/entity_attributes.gd" id="2_0b5gk"]
-[ext_resource type="Texture2D" uid="uid://bvhxhpwx7sekj" path="res://icon.svg" id="3_7cna2"]
 [ext_resource type="Script" path="res://scenes/enemy/track.gd" id="3_x3yau"]
 [ext_resource type="Script" path="res://scenes/enemy/patrol.gd" id="5_mtt7j"]
 [ext_resource type="Script" path="res://scenes/enemy/enemy_checker_area.gd" id="6_wrjjd"]
+[ext_resource type="Texture2D" uid="uid://c1s7m6fp2un4h" path="res://art/GGJ素材/敌人/diren-fangyu1.png" id="7_8b1m5"]
 [ext_resource type="Script" path="res://scenes/enemy/enemy_atk_area.gd" id="7_lbnwq"]
+[ext_resource type="Texture2D" uid="uid://ba5defoppaobm" path="res://scenes/player/art/HPblack.png" id="9_auces"]
+[ext_resource type="Texture2D" uid="uid://ccy45m0l68y7d" path="res://scenes/player/art/HPred.png" id="10_bia7q"]
 
-[sub_resource type="Resource" id="Resource_je3ts"]
+[sub_resource type="Resource" id="Resource_3b68x"]
 resource_local_to_scene = true
 script = ExtResource("2_0b5gk")
 entity = {
 "ap": 10,
 "atk_speed": 1.0,
+"boom_ap": 0,
 "cold_time": 1.0,
 "crit_magnification": 1.5,
 "crit_rate": 0.1,
 "defense": 0,
 "health": 100,
+"hitted_boom": false,
+"hitted_cold": false,
 "is_cold": false,
 "max_quantity": 1,
-"name": "enemy",
+"name": "",
 "quantity": 1,
 "reload_cd": 0.5,
 "shoot_length": 500,
-"speed": 15000
+"speed": 30000
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7faob"]
@@ -151,12 +156,13 @@ radius = 51.0392
 collision_layer = 8
 collision_mask = 3
 script = ExtResource("1_xlbva")
-self_res = SubResource("Resource_je3ts")
+self_res = SubResource("Resource_3b68x")
 
 [node name="EnemyCheckerArea" type="Area2D" parent="."]
 script = ExtResource("6_wrjjd")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyCheckerArea"]
+visible = false
 shape = SubResource("CircleShape2D_7faob")
 debug_color = Color(0.76985, 0.33772, 0.739987, 0.42)
 
@@ -171,11 +177,11 @@ script = ExtResource("3_x3yau")
 script = ExtResource("5_mtt7j")
 
 [node name="Icon" type="Sprite2D" parent="."]
-self_modulate = Color(1, 0.341176, 1, 1)
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("3_7cna2")
+texture = ExtResource("7_8b1m5")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource("CircleShape2D_kjl6u")
 
 [node name="HurtValue" type="Label" parent="."]
@@ -186,7 +192,6 @@ offset_right = 18.0
 offset_bottom = -31.0
 scale = Vector2(1.28513, 1.28513)
 theme_override_font_sizes/font_size = 36
-text = "1"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -200,10 +205,22 @@ collision_layer = 8
 script = ExtResource("7_lbnwq")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyAtkArea"]
+visible = false
 shape = SubResource("CircleShape2D_n1enr")
 debug_color = Color(0.799326, 0.404032, 0.328724, 0.42)
 
 [node name="Timer" type="Timer" parent="EnemyAtkArea"]
+
+[node name="HealthBar" type="TextureProgressBar" parent="."]
+unique_name_in_owner = true
+offset_left = -71.0
+offset_top = -83.0
+offset_right = 107.0
+offset_bottom = -67.0
+value = 50.0
+nine_patch_stretch = true
+texture_under = ExtResource("9_auces")
+texture_progress = ExtResource("10_bia7q")
 
 [connection signal="body_entered" from="EnemyCheckerArea" to="EnemyCheckerArea" method="_on_body_entered"]
 [connection signal="body_exited" from="EnemyCheckerArea" to="EnemyCheckerArea" method="_on_body_exited"]

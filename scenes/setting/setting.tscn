@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://ck7x36ij63siu" path="res://art/GGJ素材/场景/地板/Floor-middle-noth.png" id="1_licib"]
 [ext_resource type="Script" path="res://scenes/setting/resolution.gd" id="2_i80b5"]
 [ext_resource type="Script" path="res://scenes/setting/volume.gd" id="3_gt6wv"]
-[ext_resource type="Texture2D" uid="uid://nljqpx6so1mj" path="res://art/GGJ素材/报纸/paper-brown.png" id="3_m65bp"]
+[ext_resource type="Texture2D" uid="uid://4nt0qbr2cwds" path="res://art/GGJ素材/设置界面及所需按钮/设置界面.jpg" id="3_urw8s"]
 [ext_resource type="Script" path="res://scenes/setting/change_key_pos.gd" id="4_8qoxy"]
 [ext_resource type="Script" path="res://scenes/setting/change_button_icon.gd" id="5_gxj7x"]
 [ext_resource type="Script" path="res://data/custom_node/UI_hover.gd" id="6_t78cv"]
@@ -30,24 +30,31 @@ theme = SubResource("Theme_pt4ee")
 script = ExtResource("1_gcp4l")
 metadata/_edit_lock_ = true
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="Bg" type="TextureRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("3_m65bp")
+texture = ExtResource("3_urw8s")
 expand_mode = 1
 metadata/_edit_lock_ = true
 
-[node name="Resolution" type="OptionButton" parent="."]
-visible = false
+[node name="ChangeRLabel" type="Label" parent="."]
 layout_mode = 0
-offset_left = 866.0
-offset_top = 268.0
-offset_right = 1050.0
-offset_bottom = 336.0
+offset_left = 491.0
+offset_top = 257.0
+offset_right = 875.0
+offset_bottom = 373.0
+text = "分辨率调节："
+
+[node name="Resolution" type="OptionButton" parent="ChangeRLabel"]
+layout_mode = 0
+offset_left = 377.0
+offset_top = 10.0
+offset_right = 561.0
+offset_bottom = 78.0
 script = ExtResource("2_i80b5")
 
 [node name="ChangeKeyPos" type="Control" parent="."]
@@ -57,29 +64,90 @@ script = ExtResource("4_8qoxy")
 [node name="MoveRightLabel" type="Label" parent="ChangeKeyPos"]
 layout_mode = 0
 offset_left = 595.0
-offset_top = 506.0
+offset_top = 613.0
 offset_right = 915.0
-offset_bottom = 594.0
+offset_bottom = 701.0
 text = "向右移动："
 
-[node name="MoveRight" type="Button" parent="ChangeKeyPos"]
+[node name="MoveRight" type="Button" parent="ChangeKeyPos/MoveRightLabel"]
+unique_name_in_owner = true
 layout_mode = 0
-offset_left = 911.0
-offset_top = 512.0
-offset_right = 1001.0
-offset_bottom = 593.0
+offset_left = 316.0
+offset_top = 6.0
+offset_right = 406.0
+offset_bottom = 94.0
 button_mask = 0
 text = "D"
 
-[node name="UIHover2" type="Node" parent="ChangeKeyPos/MoveRight"]
+[node name="UIHover2" type="Node" parent="ChangeKeyPos/MoveRightLabel/MoveRight"]
+script = ExtResource("6_t78cv")
+
+[node name="MoveLeftLabel" type="Label" parent="ChangeKeyPos"]
+layout_mode = 0
+offset_left = 593.0
+offset_top = 501.0
+offset_right = 913.0
+offset_bottom = 589.0
+text = "向左移动："
+
+[node name="MoveLeft" type="Button" parent="ChangeKeyPos/MoveLeftLabel"]
+layout_mode = 0
+offset_left = 319.0
+offset_top = 2.0
+offset_right = 409.0
+offset_bottom = 90.0
+button_mask = 0
+text = "A"
+
+[node name="UIHover2" type="Node" parent="ChangeKeyPos/MoveLeftLabel/MoveLeft"]
+script = ExtResource("6_t78cv")
+
+[node name="MoveTopLabel" type="Label" parent="ChangeKeyPos"]
+layout_mode = 0
+offset_left = 595.0
+offset_top = 841.0
+offset_right = 915.0
+offset_bottom = 929.0
+text = "向上移动："
+
+[node name="MoveTop" type="Button" parent="ChangeKeyPos/MoveTopLabel"]
+layout_mode = 0
+offset_left = 316.0
+offset_top = 6.0
+offset_right = 406.0
+offset_bottom = 94.0
+button_mask = 0
+text = "W"
+
+[node name="UIHover2" type="Node" parent="ChangeKeyPos/MoveTopLabel/MoveTop"]
+script = ExtResource("6_t78cv")
+
+[node name="MoveDownLabel" type="Label" parent="ChangeKeyPos"]
+layout_mode = 0
+offset_left = 593.0
+offset_top = 729.0
+offset_right = 913.0
+offset_bottom = 817.0
+text = "向下移动："
+
+[node name="MoveDown" type="Button" parent="ChangeKeyPos/MoveDownLabel"]
+layout_mode = 0
+offset_left = 319.0
+offset_top = 2.0
+offset_right = 409.0
+offset_bottom = 90.0
+button_mask = 0
+text = "S"
+
+[node name="UIHover2" type="Node" parent="ChangeKeyPos/MoveDownLabel/MoveDown"]
 script = ExtResource("6_t78cv")
 
 [node name="ChangeButtonIcon" type="Button" parent="."]
 layout_mode = 0
-offset_left = 888.0
-offset_top = 619.0
-offset_right = 1024.0
-offset_bottom = 720.0
+offset_left = 1231.0
+offset_top = 666.0
+offset_right = 1743.0
+offset_bottom = 767.0
 text = "改变鼠标光标图像"
 script = ExtResource("5_gxj7x")
 
@@ -117,12 +185,12 @@ offset_right = 1154.0
 offset_bottom = 465.0
 max_value = 1.0
 step = 0.01
-value = 1.0
 script = ExtResource("3_gt6wv")
 
 [connection signal="gui_input" from="." to="." method="_on_gui_input"]
-[connection signal="item_selected" from="Resolution" to="Resolution" method="_on_resolution_item_selected"]
-[connection signal="pressed" from="ChangeKeyPos/MoveRight" to="ChangeKeyPos" method="_on_move_right_pressed"]
+[connection signal="item_selected" from="ChangeRLabel/Resolution" to="ChangeRLabel/Resolution" method="_on_resolution_item_selected"]
+[connection signal="pressed" from="ChangeKeyPos/MoveRightLabel/MoveRight" to="ChangeKeyPos" method="_on_move_right_pressed"]
+[connection signal="pressed" from="ChangeKeyPos/MoveTopLabel/MoveTop" to="ChangeKeyPos" method="_on_move_right_pressed"]
 [connection signal="pressed" from="ChangeButtonIcon" to="ChangeButtonIcon" method="_on_pressed"]
 [connection signal="pressed" from="Exit" to="Exit" method="_on_pressed"]
 [connection signal="value_changed" from="AboutVolume/Volume" to="AboutVolume/Volume" method="_on_value_changed"]

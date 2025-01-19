@@ -1,11 +1,16 @@
-[gd_scene load_steps=9 format=3 uid="uid://b5r0wi2cn0gub"]
+[gd_scene load_steps=30 format=3 uid="uid://b5r0wi2cn0gub"]
 
 [ext_resource type="Script" path="res://start_game.gd" id="1_dc58d"]
 [ext_resource type="Texture2D" uid="uid://c05maj5d5afnt" path="res://art/GGJ素材/场景/装饰用贴画/label-1.png" id="1_lfx23"]
-[ext_resource type="Texture2D" uid="uid://cnluefif7r6op" path="res://art/GGJ素材/报纸/paper-grey.png" id="2_2gju6"]
 [ext_resource type="Script" path="res://scenes/start_menu/setting.gd" id="2_2t1lu"]
+[ext_resource type="Texture2D" uid="uid://qf227osf06mj" path="res://art/GGJ素材/主标题及其按钮/主标题.jpg" id="2_jsfof"]
+[ext_resource type="Script" path="res://scenes/start_menu/start_menu.gd" id="2_klnhj"]
 [ext_resource type="Script" path="res://scenes/start_menu/exit.gd" id="3_5msls"]
+[ext_resource type="Texture2D" uid="uid://dpi7ejqqrc4l" path="res://art/GGJ素材/设置界面及所需按钮/Begin.png" id="3_5n33k"]
 [ext_resource type="Script" path="res://data/custom_node/UI_hover.gd" id="4_snrp7"]
+[ext_resource type="Texture2D" uid="uid://ustt737m28je" path="res://art/GGJ素材/设置界面及所需按钮/Setting.png" id="6_0v2nh"]
+[ext_resource type="Texture2D" uid="uid://bg0rusj01hp3i" path="res://art/GGJ素材/设置界面及所需按钮/Exit.png" id="8_gc8fu"]
+[ext_resource type="Texture2D" uid="uid://c5iujpajehbfl" path="res://art/GGJ素材/设置界面及所需按钮/Producer.png" id="10_egcyb"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_m0es2"]
 texture = ExtResource("1_lfx23")
@@ -16,6 +21,54 @@ Button/styles/focus = SubResource("StyleBoxTexture_m0es2")
 Button/styles/hover = SubResource("StyleBoxTexture_m0es2")
 Button/styles/normal = SubResource("StyleBoxTexture_m0es2")
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_nvyv6"]
+texture = ExtResource("3_5n33k")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_0f0uk"]
+texture = ExtResource("3_5n33k")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3c2dj"]
+texture = ExtResource("3_5n33k")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_s22sx"]
+texture = ExtResource("3_5n33k")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_rxcld"]
+texture = ExtResource("6_0v2nh")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5l4cg"]
+texture = ExtResource("6_0v2nh")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_wa4hv"]
+texture = ExtResource("6_0v2nh")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_i52ct"]
+texture = ExtResource("6_0v2nh")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_6jcrm"]
+texture = ExtResource("8_gc8fu")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ijtmg"]
+texture = ExtResource("8_gc8fu")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_rdv71"]
+texture = ExtResource("8_gc8fu")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_uxpx4"]
+texture = ExtResource("8_gc8fu")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vrli7"]
+texture = ExtResource("10_egcyb")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8njlr"]
+texture = ExtResource("10_egcyb")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_dd1uh"]
+texture = ExtResource("10_egcyb")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_dlnly"]
+texture = ExtResource("10_egcyb")
+
 [node name="StartMenu" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -24,6 +77,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource("Theme_6gsph")
+script = ExtResource("2_klnhj")
 
 [node name="Bg" type="TextureRect" parent="."]
 layout_mode = 1
@@ -32,7 +86,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_2gju6")
+texture = ExtResource("2_jsfof")
 expand_mode = 1
 
 [node name="Buttons" type="Control" parent="."]
@@ -42,12 +96,15 @@ offset_bottom = 40.0
 
 [node name="StartGame" type="Button" parent="Buttons"]
 layout_mode = 2
-offset_left = 634.0
-offset_top = 98.0
-offset_right = 1284.0
-offset_bottom = 298.0
+offset_left = 273.0
+offset_top = 435.0
+offset_right = 773.0
+offset_bottom = 585.0
 size_flags_vertical = 3
-text = "开始游戏"
+theme_override_styles/focus = SubResource("StyleBoxTexture_nvyv6")
+theme_override_styles/hover = SubResource("StyleBoxTexture_0f0uk")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_3c2dj")
+theme_override_styles/normal = SubResource("StyleBoxTexture_s22sx")
 script = ExtResource("1_dc58d")
 
 [node name="UIHover" type="Node" parent="Buttons/StartGame"]
@@ -55,12 +112,15 @@ script = ExtResource("4_snrp7")
 
 [node name="Setting" type="Button" parent="Buttons"]
 layout_mode = 2
-offset_left = 634.0
-offset_top = 322.0
-offset_right = 1284.0
-offset_bottom = 522.0
+offset_left = 316.0
+offset_top = 740.0
+offset_right = 816.0
+offset_bottom = 890.0
 size_flags_vertical = 3
-text = "设置"
+theme_override_styles/focus = SubResource("StyleBoxTexture_rxcld")
+theme_override_styles/hover = SubResource("StyleBoxTexture_5l4cg")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_wa4hv")
+theme_override_styles/normal = SubResource("StyleBoxTexture_i52ct")
 script = ExtResource("2_2t1lu")
 
 [node name="UIHover" type="Node" parent="Buttons/Setting"]
@@ -68,26 +128,33 @@ script = ExtResource("4_snrp7")
 
 [node name="Exit" type="Button" parent="Buttons"]
 layout_mode = 2
-offset_left = 634.0
-offset_top = 546.0
-offset_right = 1284.0
-offset_bottom = 746.0
+offset_left = 439.0
+offset_top = 592.0
+offset_right = 839.0
+offset_bottom = 742.0
 size_flags_vertical = 3
-text = "退出游戏"
+theme_override_styles/focus = SubResource("StyleBoxTexture_6jcrm")
+theme_override_styles/hover = SubResource("StyleBoxTexture_ijtmg")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_rdv71")
+theme_override_styles/normal = SubResource("StyleBoxTexture_uxpx4")
 script = ExtResource("3_5msls")
 
 [node name="UIHover" type="Node" parent="Buttons/Exit"]
 script = ExtResource("4_snrp7")
 
-[node name="Button4" type="Button" parent="Buttons"]
+[node name="Producer" type="Button" parent="Buttons"]
 layout_mode = 2
-offset_left = 634.0
-offset_top = 770.0
-offset_right = 1284.0
-offset_bottom = 970.0
+offset_left = 585.0
+offset_top = 894.0
+offset_right = 1085.0
+offset_bottom = 1044.0
 size_flags_vertical = 3
+theme_override_styles/focus = SubResource("StyleBoxTexture_vrli7")
+theme_override_styles/hover = SubResource("StyleBoxTexture_8njlr")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_dd1uh")
+theme_override_styles/normal = SubResource("StyleBoxTexture_dlnly")
 
-[node name="UIHover" type="Node" parent="Buttons/Button4"]
+[node name="UIHover" type="Node" parent="Buttons/Producer"]
 script = ExtResource("4_snrp7")
 
 [connection signal="pressed" from="Buttons/StartGame" to="Buttons/StartGame" method="_on_pressed"]

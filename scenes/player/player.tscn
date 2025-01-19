@@ -1,18 +1,21 @@
-[gd_scene load_steps=17 format=3 uid="uid://db5cx0wekpik6"]
+[gd_scene load_steps=21 format=3 uid="uid://db5cx0wekpik6"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_fhpln"]
 [ext_resource type="Script" path="res://data/res_script/entity_attributes.gd" id="2_f7bwx"]
 [ext_resource type="Script" path="res://scenes/player/ray_cast_2d.gd" id="3_huqfe"]
-[ext_resource type="Texture2D" uid="uid://uproiogr6msq" path="res://art/GGJ素材/角色/MainCharacter-pin.png" id="3_y4rp3"]
+[ext_resource type="Texture2D" uid="uid://o5vqlmx65dcw" path="res://art/GGJ素材/角色/MainCharacter.png" id="3_xawkd"]
 [ext_resource type="Script" path="res://data/custom_node/state_mahchine/StateMachine.gd" id="4_o5jed"]
 [ext_resource type="Script" path="res://scenes/player/shoot.gd" id="5_74suq"]
 [ext_resource type="Script" path="res://scenes/player/boom_area.gd" id="5_l2uo0"]
-[ext_resource type="Texture2D" uid="uid://c2rccmlbpsbrl" path="res://art/GGJ素材/字符/POP.png" id="6_05c6b"]
 [ext_resource type="Script" path="res://scenes/player/death.gd" id="6_55bke"]
+[ext_resource type="Texture2D" uid="uid://d3h26pgewf5ix" path="res://art/GGJ素材/特效/bOOM_.png" id="6_toqel"]
 [ext_resource type="PackedScene" uid="uid://pbpok6cupast" path="res://scenes/soda_can/soda_can.tscn" id="8_2itht"]
 [ext_resource type="Texture2D" uid="uid://ba5defoppaobm" path="res://scenes/player/art/HPblack.png" id="9_6eeiw"]
 [ext_resource type="Texture2D" uid="uid://ccy45m0l68y7d" path="res://scenes/player/art/HPred.png" id="10_syh43"]
+[ext_resource type="Shader" path="res://scenes/player/描边.gdshader" id="11_e4xp3"]
 [ext_resource type="Texture2D" uid="uid://djrfmyce6ce0c" path="res://art/GGJ素材/子弹/bullet-1.png" id="12_bxwfx"]
+[ext_resource type="Texture2D" uid="uid://ehd05qr7fhe4" path="res://scenes/player/art/HPblack-out.png" id="12_vkj4j"]
+[ext_resource type="Texture2D" uid="uid://0o1fl2bj1y41" path="res://art/GGJ素材/场景/head.png" id="14_jahqy"]
 
 [sub_resource type="Resource" id="Resource_htork"]
 script = ExtResource("2_f7bwx")
@@ -42,6 +45,11 @@ radius = 129.004
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u2ydm"]
 size = Vector2(183, 87)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7b1e1"]
+shader = ExtResource("11_e4xp3")
+shader_parameter/outline_color = Color(1, 0.24, 0.24, 1)
+shader_parameter/outline_width = 10.0
+
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 z_index = 1
 collision_mask = 11
@@ -52,7 +60,7 @@ self_res = SubResource("Resource_htork")
 [node name="Show" type="Node2D" parent="."]
 
 [node name="Icon" type="Sprite2D" parent="Show"]
-texture = ExtResource("3_y4rp3")
+texture = ExtResource("3_xawkd")
 offset = Vector2(0, -140)
 
 [node name="SodaCan" parent="Show" instance=ExtResource("8_2itht")]
@@ -78,10 +86,9 @@ shape = SubResource("CircleShape2D_qv4pp")
 debug_color = Color(0.785695, 0.414608, 0.340702, 0.42)
 
 [node name="Pop" type="Sprite2D" parent="Show/BoomArea"]
-visible = false
 position = Vector2(-2, -8)
-scale = Vector2(1.3, 1.3)
-texture = ExtResource("6_05c6b")
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("6_toqel")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-2.5, -1.5)
@@ -108,12 +115,13 @@ script = ExtResource("6_55bke")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
-offset_left = 389.0
-offset_top = 21.0
-offset_right = 1878.0
-offset_bottom = 163.0
-texture = ExtResource("9_6eeiw")
+[node name="HealthBarOver" type="TextureRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_7b1e1")
+offset_left = 403.0
+offset_top = -13.0
+offset_right = 1863.0
+offset_bottom = 202.0
+texture = ExtResource("12_vkj4j")
 expand_mode = 1
 
 [node name="HealthBar" type="TextureProgressBar" parent="CanvasLayer"]
@@ -127,24 +135,27 @@ nine_patch_stretch = true
 texture_under = ExtResource("9_6eeiw")
 texture_progress = ExtResource("10_syh43")
 
-[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer"]
+[node name="BulletQuantity" type="Label" parent="CanvasLayer"]
+unique_name_in_owner = true
+self_modulate = Color(0, 0, 0, 1)
+z_index = 2
+offset_left = 549.0
+offset_top = 175.0
+offset_right = 767.0
+offset_bottom = 263.0
+theme_override_font_sizes/font_size = 64
+text = "x1"
+vertical_alignment = 1
+
+[node name="Bullet" type="TextureRect" parent="CanvasLayer"]
 offset_left = 408.0
 offset_top = 153.0
 offset_right = 533.0
 offset_bottom = 272.0
-
-[node name="BulletQuantity" type="Label" parent="CanvasLayer/PanelContainer"]
-unique_name_in_owner = true
-self_modulate = Color(0.888207, 0.599305, 0.316216, 1)
-z_index = 2
-layout_mode = 2
-theme_override_font_sizes/font_size = 64
-text = "1"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Bullet" type="TextureRect" parent="CanvasLayer/PanelContainer"]
-layout_mode = 2
 texture = ExtResource("12_bxwfx")
+
+[node name="Head" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(261, 177)
+texture = ExtResource("14_jahqy")
 
 [connection signal="body_entered" from="Show/BoomArea" to="Show/BoomArea" method="_on_body_entered"]

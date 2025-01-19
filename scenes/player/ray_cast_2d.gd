@@ -40,10 +40,11 @@ func _input(event: InputEvent) -> void:
 		if event.is_action_pressed("shoot"):
 			AudioPlayer.play(SHOOT)
 			owner.self_res.entity["quantity"]-=1
-			bullet_quantity.text=str(owner.self_res.entity["quantity"])
+			bullet_quantity.text=str("x",owner.self_res.entity["quantity"])
 			raycast_shoot()
 			time=0
 			if owner.self_res.entity["quantity"]<=0:
+				bullet_quantity.self_modulate=Color.CRIMSON
 				AudioPlayer.play(EQUIP)
 				if owner.self_res.entity["reload_cd"]>0:
 					reload_cd.wait_time=owner.self_res.entity["reload_cd"]
@@ -51,22 +52,32 @@ func _input(event: InputEvent) -> void:
 					reload_cd.timeout.connect(func(): 
 						owner.self_res.entity["quantity"]\
 						=owner.self_res.entity["max_quantity"]
-						bullet_quantity.text=str(owner.self_res.entity["quantity"]) 
+						bullet_quantity.self_modulate=Color(0,0,0,1)
+						bullet_quantity.text=str("x",owner.self_res.entity["quantity"]) 
 					)
 				elif is_equal_approx(owner.self_res.entity["reload_cd"],0):
 					owner.self_res.entity["quantity"]\
 						=owner.self_res.entity["max_quantity"]
-					bullet_quantity.text=str(owner.self_res.entity["quantity"]) 
+					bullet_quantity.self_modulate=Color(0,0,0,1)
+					bullet_quantity.text=str("x",owner.self_res.entity["quantity"]) 
 
 func raycast_shoot():
 	one_shoot=true
+	#获取鼠标本地坐标及子弹实例
 	var mouse_pos:Vector2=get_viewport().get_mouse_position()
 	var local_mouse_pos:Vector2=self.to_local(mouse_pos).normalized()
 	var bp_ins:=bullet_pic.instantiate()
+
+	#设置子弹初始位置及翻转对应
 	bp_ins.global_position=owner.global_position
 	if not is_flip:
 		bp_ins.dir=local_mouse_pos
 	else:
 		bp_ins.dir=Vector2(-local_mouse_pos.x,local_mouse_pos.y)
+
 	owner.get_parent().call_deferred("add_child",bp_ins)
 	self.target_position=local_mouse_pos*SHOOT_LENGTH
+	#改变鼠标光标
+	Input.set_custom_mouse_cursor(preload("res://art/GGJ素材/锚点/maodian1.png"),0,Vector2(56,56))
+	await get_tree().create_timer(0.1).timeout
+	Input.set_custom_mouse_cursor(preload("res://art/GGJ素材/锚点/maodian2.png"),0,Vector2(31,31))

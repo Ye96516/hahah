@@ -9,6 +9,7 @@ class_name Player extends CharacterBody2D
 @onready var canvas_layer: CanvasLayer = $CanvasLayer
 @onready var health_bar: TextureProgressBar = %HealthBar
 @onready var health:int=self_res.entity["health"]
+@onready var health_bar_over: TextureRect = $CanvasLayer/HealthBarOver
 
 @export var self_res:EntityAtrributes
 
@@ -19,6 +20,7 @@ var is_first_scale_change:bool=true
 var is_death:bool
 
 func _ready() -> void:
+	health_bar_over.material.set("shader_parameter/outline_width",0)
 	health_bar.value= self_res.entity["health"]
 	pass
 
@@ -75,6 +77,8 @@ func _input(event: InputEvent) -> void:
 func _on_hurt():
 	#处理受击逻辑
 	if self_res.entity["health"]!=health:
+		if self_res.entity["health"]<=30:
+			health_bar_over.material.set("shader_parameter/outline_width",10)
 		health_bar.value=self_res.entity["health"]
 		#判断死亡
 		if self_res.entity["health"]<=0 && not is_death:

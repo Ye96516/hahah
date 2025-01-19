@@ -57,21 +57,15 @@ func _physics_process(delta: float) -> void:
 				var enemy_ins:=enemy.instantiate()	
 				match enemy_s:
 					"1":
-						var res1:=preload("res://scenes/enemy/data/enemy1.tres")
-						res1.resource_local_to_scene=true
-						enemy_ins.self_res=res1
+						enemy_ins.current_enemy="enemy1"
 					"2":
-						var res2:=preload("res://scenes/enemy/data/enemy2.tres")
-						res2.resource_local_to_scene=true
-						enemy_ins.self_res=res2
+						enemy_ins.current_enemy="enemy2"
 					"3":
-						var res3:=preload("res://scenes/enemy/data/enemy3.tres")
-						res3.resource_local_to_scene=true
-						enemy_ins.self_res=res3
+						enemy_ins.current_enemy="enemy3"
+				
 				if get_parent() is EnemyManager:
 					get_parent().enemys.append(enemy_ins)
 					get_parent().enemy_quantity+=1
-				print(enemy_ins.self_res.get_id())
 				if follow_x:
 					enemy_ins.position+=Vector2(randf_range(-x_length,x_length),0)
 				else:
@@ -80,7 +74,7 @@ func _physics_process(delta: float) -> void:
 					enemy_ins.p1=path.points[0]
 					enemy_ins.p2=path.points[1]
 				add_child(enemy_ins)
-				
+				print(enemy_ins.self_res.entity["name"])
 			timer.wait_time=time[number]
 			number+=1
 			timer.start()
