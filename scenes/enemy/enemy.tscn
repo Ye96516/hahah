@@ -9,15 +9,18 @@
 [ext_resource type="Script" path="res://scenes/enemy/enemy_checker_area.gd" id="6_wrjjd"]
 [ext_resource type="Script" path="res://scenes/enemy/enemy_atk_area.gd" id="7_lbnwq"]
 
-[sub_resource type="Resource" id="Resource_44uaf"]
+[sub_resource type="Resource" id="Resource_je3ts"]
+resource_local_to_scene = true
 script = ExtResource("2_0b5gk")
 entity = {
 "ap": 10,
 "atk_speed": 1.0,
-"crit_magnification": 1.0,
+"cold_time": 1.0,
+"crit_magnification": 1.5,
 "crit_rate": 0.1,
 "defense": 0,
 "health": 100,
+"is_cold": false,
 "max_quantity": 1,
 "name": "enemy",
 "quantity": 1,
@@ -27,7 +30,7 @@ entity = {
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7faob"]
-radius = 138.033
+radius = 506.009
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_kjl6u"]
 radius = 31.0
@@ -148,7 +151,7 @@ radius = 51.0392
 collision_layer = 8
 collision_mask = 3
 script = ExtResource("1_xlbva")
-self_res = SubResource("Resource_44uaf")
+self_res = SubResource("Resource_je3ts")
 
 [node name="EnemyCheckerArea" type="Area2D" parent="."]
 script = ExtResource("6_wrjjd")

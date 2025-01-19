@@ -13,5 +13,9 @@ class_name EntityAtrributes extends Resource
 	"defense"=0,
 	"atk_speed"=1.0,
 	"reload_cd"=0.5,
-	
+	"boom_ap"=0,
+	"hitted_boom"=false,
+	"hitted_cold"=false,
+	"is_cold"=false,
+	"cold_time"=1.0,
 }

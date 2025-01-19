@@ -7,6 +7,7 @@
 collision_layer = 4
 script = ExtResource("1_0ww22")
 follow_x = true
+can_spawn = true
 
 [node name="DoorSprite" type="Sprite2D" parent="."]
 texture = ExtResource("2_uru8m")

@@ -1,12 +1,12 @@
 extends RayCast2D
 
-@export var shoot_length:int=500
-
 const SHOOT = preload("res://scenes/player/art/sound/shoot.ogg")
 const EQUIP = preload("res://scenes/player/art/sound/Equip.ogg")
+const SHOOT_LENGTH:int=3000
 var one_shoot:bool
 var is_flip:bool
 var time:float
+var cool_slow:bool
 
 @onready var bullet_pic:=preload("res://scenes/bullet_pic/bullet_pic.tscn")
 @onready var bullet_quantity: Label = %BulletQuantity
@@ -17,15 +17,21 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	time+=delta
+	#命中检测
 	if self.is_colliding() && one_shoot:
 		var collider=self.get_collider()
 		if is_instance_valid(collider):
 			if collider.is_in_group("enemy"):
-				var v:Array=NA.calculate_health(owner.self_res,collider.self_res)
-				if v[1]:
-					collider.get_node("HurtValue").modulate=Color.CORAL
+				if owner.self_res.entity["hitted_cold"]:
+					NA.bullet_effect("cold",collider.self_res)
+				if owner.self_res.entity["boom_ap"]>0:
+					%BoomArea.move(self.get_collision_point())
 				else:
-					collider.get_node("HurtValue").modulate=Color(1,1,1)
+					var v:Array=NA.calculate_health(owner.self_res,collider.self_res)
+					if v[1]:
+						collider.get_node("HurtValue").modulate=Color.CORAL
+					else:
+						collider.get_node("HurtValue").modulate=Color(1,1,1)
 				one_shoot=false
 
 func _input(event: InputEvent) -> void:
@@ -50,6 +56,7 @@ func _input(event: InputEvent) -> void:
 				elif is_equal_approx(owner.self_res.entity["reload_cd"],0):
 					owner.self_res.entity["quantity"]\
 						=owner.self_res.entity["max_quantity"]
+					bullet_quantity.text=str(owner.self_res.entity["quantity"]) 
 
 func raycast_shoot():
 	one_shoot=true
@@ -62,4 +69,4 @@ func raycast_shoot():
 	else:
 		bp_ins.dir=Vector2(-local_mouse_pos.x,local_mouse_pos.y)
 	owner.get_parent().call_deferred("add_child",bp_ins)
-	self.target_position=local_mouse_pos*shoot_length
+	self.target_position=local_mouse_pos*SHOOT_LENGTH

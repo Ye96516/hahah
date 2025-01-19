@@ -1,10 +1,15 @@
 class_name Bullet extends Sprite2D
 
 @export var attri:Dictionary={
+	"name":"",
 	"ap":0,
 	"max_quantity":1,
 	"atk_speed":0.0,
 	"reload_cd":0.0,
+	"crit_rate":0.0,
+	"crit_magnification":1.0,
+	"hitted_cold":false,
+	"boom_ap":0,
 }
 @onready var panel_container: PanelContainer = $CanvasLayer/PanelContainer
 

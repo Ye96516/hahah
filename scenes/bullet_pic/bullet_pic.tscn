@@ -1,15 +1,41 @@
-[gd_scene load_steps=3 format=3 uid="uid://dgxc7hlu7ihhm"]
+[gd_scene load_steps=5 format=3 uid="uid://dgxc7hlu7ihhm"]
 
-[ext_resource type="Texture2D" uid="uid://bvhxhpwx7sekj" path="res://icon.svg" id="1_cwnml"]
 [ext_resource type="Script" path="res://scenes/bullet_pic/bullet_pic.gd" id="2_8cy1f"]
+[ext_resource type="Texture2D" uid="uid://4kn0h8683lwa" path="res://art/GGJ素材/子弹/bullet-2.png" id="2_h5bja"]
 
-[node name="BulletPic" type="Sprite2D"]
-scale = Vector2(0.75, 0.21875)
-texture = ExtResource("1_cwnml")
+[sub_resource type="CircleShape2D" id="CircleShape2D_yw6n1"]
+radius = 24.5
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_b4eup"]
+radius = 83.0
+
+[node name="BulletArea" type="Area2D"]
+collision_layer = 4
+collision_mask = 8
 script = ExtResource("2_8cy1f")
 
-[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
-position = Vector2(-0.66667, -3.8147e-06)
-scale = Vector2(6.2, 5.94286)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.499998, -1)
+shape = SubResource("CircleShape2D_yw6n1")
+debug_color = Color(0.75484, 0.441794, 0.316494, 0.42)
 
-[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
+[node name="BulletPic" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_h5bja")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="BulletPic"]
+position = Vector2(0.999998, -0.999997)
+scale = Vector2(4.7, 4.7)
+
+[node name="BoomArea" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BoomArea"]
+shape = SubResource("CircleShape2D_b4eup")
+metadata/_edit_lock_ = true
+
+[connection signal="body_entered" from="." to="." method="_on_bullet_area_body_entered"]
+[connection signal="body_entered" from="." to="BulletPic" method="_on_bullet_area_body_entered"]
+[connection signal="screen_exited" from="BulletPic/VisibleOnScreenNotifier2D" to="BulletPic" method="_on_visible_on_screen_notifier_2d_screen_exited"]
+[connection signal="body_entered" from="BoomArea" to="." method="_on_boom_area_body_entered"]

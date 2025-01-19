@@ -31,6 +31,10 @@ func _physics_process(delta: float) -> void:
 		self_res.entity["ap"]=bullet.attri["ap"]
 		self_res.entity["atk_speed"]=bullet.attri["atk_speed"]
 		self_res.entity["reload_cd"]=bullet.attri["reload_cd"]
+		self_res.entity["hitted_cold"]=bullet.attri["hitted_cold"]
+		self_res.entity["crit_rate"]=bullet.attri["crit_rate"]
+		self_res.entity["crit_magnification"]=bullet.attri["crit_magnification"]
+		self_res.entity["boom_ap"]=bullet.attri["boom_ap"]
 		self_res.entity["max_quantity"]=bullet.attri["max_quantity"]
 		self_res.entity["quantity"]=self_res.entity["max_quantity"]
 		bullet_quantity.text=str(self_res.entity["quantity"])
