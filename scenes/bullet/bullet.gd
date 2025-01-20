@@ -10,9 +10,14 @@ class_name Bullet extends Sprite2D
 	"crit_magnification":1.0,
 	"hitted_cold":false,
 	"boom_ap":0,
+	"pic":preload("res://art/GGJ素材/子弹/bullet-2.png"),
+	
 }
 @onready var panel_container: PanelContainer = $CanvasLayer/PanelContainer
 
+func _ready() -> void:
+	self.texture=attri["pic"]
+	
 func _on_bullet_area_body_entered(body: Node2D) -> void:
 	if body is Player:
 		body.bullet=self

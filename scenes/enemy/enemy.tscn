@@ -39,10 +39,10 @@ entity = {
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7faob"]
-radius = 506.009
+radius = 540.015
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_kjl6u"]
-radius = 31.0
+radius = 65.0
 
 [sub_resource type="Animation" id="Animation_j7y64"]
 length = 0.001
@@ -200,7 +200,7 @@ _data = {
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_n1enr"]
-radius = 51.0392
+radius = 88.1419
 
 [node name="Enemy" type="CharacterBody2D" groups=["enemy"]]
 collision_layer = 8
@@ -212,13 +212,12 @@ self_res = SubResource("Resource_3b68x")
 script = ExtResource("6_wrjjd")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyCheckerArea"]
-visible = false
 shape = SubResource("CircleShape2D_7faob")
 debug_color = Color(0.76985, 0.33772, 0.739987, 0.42)
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("current_state")]
 script = ExtResource("1_w3js1")
-current_state = NodePath("Patrol")
+current_state = NodePath("Track")
 
 [node name="Track" type="Node" parent="StateMachine"]
 script = ExtResource("3_x3yau")
@@ -230,11 +229,10 @@ script = ExtResource("5_mtt7j")
 script = ExtResource("7_yh1nd")
 
 [node name="Icon" type="Sprite2D" parent="."]
-scale = Vector2(0.5, 0.5)
+scale = Vector2(0.8, 0.8)
 texture = ExtResource("7_8b1m5")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 shape = SubResource("CircleShape2D_kjl6u")
 
 [node name="HurtValue" type="Label" parent="."]
@@ -263,7 +261,6 @@ collision_layer = 8
 script = ExtResource("7_lbnwq")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyAtkArea"]
-visible = false
 shape = SubResource("CircleShape2D_n1enr")
 debug_color = Color(0.799326, 0.404032, 0.328724, 0.42)
 
@@ -271,10 +268,10 @@ debug_color = Color(0.799326, 0.404032, 0.328724, 0.42)
 
 [node name="HealthBar" type="TextureProgressBar" parent="."]
 unique_name_in_owner = true
-offset_left = -71.0
-offset_top = -83.0
-offset_right = 107.0
-offset_bottom = -67.0
+offset_left = -78.0
+offset_top = -103.0
+offset_right = 100.0
+offset_bottom = -87.0
 value = 50.0
 nine_patch_stretch = true
 texture_under = ExtResource("9_auces")

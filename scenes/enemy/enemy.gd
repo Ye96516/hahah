@@ -23,6 +23,14 @@ var health:float
 
 func _ready() -> void:
 	choose_enemy()
+	randomize()
+	var number:int=randi_range(1,3)
+	if number==1:
+		bullet_type="普通子弹"
+	elif number==2:
+		bullet_type="冰霜子弹"
+	elif number==3:
+		bullet_type="爆炸子弹"
 	health=self_res.entity["health"]
 	health_bar.max_value=self_res.entity["health"]
 	health_bar.value=self_res.entity["health"]

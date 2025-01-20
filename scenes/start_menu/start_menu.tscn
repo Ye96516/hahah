@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://b5r0wi2cn0gub"]
+[gd_scene load_steps=37 format=3 uid="uid://b5r0wi2cn0gub"]
 
 [ext_resource type="Script" path="res://start_game.gd" id="1_dc58d"]
 [ext_resource type="Texture2D" uid="uid://c05maj5d5afnt" path="res://art/GGJ素材/场景/装饰用贴画/label-1.png" id="1_lfx23"]
@@ -11,6 +11,9 @@
 [ext_resource type="Texture2D" uid="uid://ustt737m28je" path="res://art/GGJ素材/设置界面及所需按钮/Setting.png" id="6_0v2nh"]
 [ext_resource type="Texture2D" uid="uid://bg0rusj01hp3i" path="res://art/GGJ素材/设置界面及所需按钮/Exit.png" id="8_gc8fu"]
 [ext_resource type="Texture2D" uid="uid://c5iujpajehbfl" path="res://art/GGJ素材/设置界面及所需按钮/Producer.png" id="10_egcyb"]
+[ext_resource type="Texture2D" uid="uid://ixccueyql205" path="res://art/GGJ素材/设置界面及所需按钮/制作人名单（如果用的上的话）.png" id="12_q7xed"]
+[ext_resource type="Texture2D" uid="uid://d4h724b5e2age" path="res://art/GGJ素材/设置界面及所需按钮/Back.png" id="13_u5gpt"]
+[ext_resource type="Script" path="res://scenes/start_menu/back.gd" id="14_m4fya"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_m0es2"]
 texture = ExtResource("1_lfx23")
@@ -68,6 +71,18 @@ texture = ExtResource("10_egcyb")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_dlnly"]
 texture = ExtResource("10_egcyb")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_s2jf3"]
+texture = ExtResource("13_u5gpt")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_b4e6o"]
+texture = ExtResource("13_u5gpt")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_s718m"]
+texture = ExtResource("13_u5gpt")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5cg2p"]
+texture = ExtResource("13_u5gpt")
 
 [node name="StartMenu" type="Control"]
 layout_mode = 3
@@ -157,6 +172,49 @@ theme_override_styles/normal = SubResource("StyleBoxTexture_dlnly")
 [node name="UIHover" type="Node" parent="Buttons/Producer"]
 script = ExtResource("4_snrp7")
 
+[node name="制作人名单（如果用的上的话）" type="TextureRect" parent="Buttons"]
+layout_mode = 0
+offset_left = 634.0
+offset_top = 235.0
+offset_right = 1234.0
+offset_bottom = 835.0
+texture = ExtResource("12_q7xed")
+
+[node name="RichTextLabel" type="Label" parent="Buttons/制作人名单（如果用的上的话）"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 101.0
+offset_top = 111.0
+offset_right = 101.0
+offset_bottom = 111.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+text = "美术：抱海豹，寿司，白夜
+
+策划：寿司，白夜
+
+程序：燃桂尽
+"
+
+[node name="Back" type="Button" parent="Buttons/制作人名单（如果用的上的话）"]
+offset_left = 95.0
+offset_top = 360.0
+offset_right = 458.0
+offset_bottom = 532.0
+theme_override_styles/focus = SubResource("StyleBoxTexture_s2jf3")
+theme_override_styles/hover = SubResource("StyleBoxTexture_b4e6o")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_s718m")
+theme_override_styles/normal = SubResource("StyleBoxTexture_5cg2p")
+script = ExtResource("14_m4fya")
+
+[node name="UIHover2" type="Node" parent="Buttons/制作人名单（如果用的上的话）/Back"]
+script = ExtResource("4_snrp7")
+
 [connection signal="pressed" from="Buttons/StartGame" to="Buttons/StartGame" method="_on_pressed"]
 [connection signal="pressed" from="Buttons/Setting" to="Buttons/Setting" method="_on_pressed"]
 [connection signal="pressed" from="Buttons/Exit" to="Buttons/Exit" method="_on_pressed"]
+[connection signal="pressed" from="Buttons/Producer" to="." method="_on_producer_pressed"]
+[connection signal="pressed" from="Buttons/制作人名单（如果用的上的话）/Back" to="Buttons/制作人名单（如果用的上的话）/Back" method="_on_pressed"]

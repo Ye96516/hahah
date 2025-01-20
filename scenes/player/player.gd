@@ -11,8 +11,11 @@ class_name Player extends CharacterBody2D
 @onready var health:float=self_res.entity["health"]
 @onready var health_bar_over: TextureRect = $CanvasLayer/HealthBarOver
 @onready var icon: Sprite2D = $Show/Icon
+@onready var count_down: Label = %CountDown
+@onready var score: Label = %Score
 
 @export var self_res:EntityAtrributes
+@export var cout_time:float=60
 
 const MAIN_CHARACTER = preload("res://art/GGJ素材/角色/MainCharacter.png")
 const MAIN_CHARACTER_PIN = preload("res://art/GGJ素材/角色/MainCharacter-pin.png")
@@ -23,7 +26,6 @@ var is_first_scale_change:bool=true
 var is_death:bool
 
 func _ready() -> void:
-
 	health_bar_over.material.set("shader_parameter/outline_width",0)
 	health_bar.value= self_res.entity["health"]
 	pass
@@ -54,6 +56,11 @@ func _physics_process(delta: float) -> void:
 		handle_show_node_scale(true)
 	
 	_on_hurt()
+	cout_time-=delta
+	count_down.text="CountDown: "+str(int(cout_time))
+	score.text="Score: "+str(NA.score)
+	if cout_time<=0:
+		get_tree().change_scene_to_file("res://scenes/start_menu/start_menu.tscn")
 
 func handle_show_node_scale(is_flip:bool):
 	if not is_flip && is_first_scale_change:

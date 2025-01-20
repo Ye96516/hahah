@@ -1,15 +1,16 @@
-[gd_scene load_steps=12 format=3 uid="uid://c2v4ioh2w0jtt"]
+[gd_scene load_steps=13 format=3 uid="uid://c2v4ioh2w0jtt"]
 
 [ext_resource type="PackedScene" uid="uid://bhgvih0djkv32" path="res://scenes/obstacle/obstacle.tscn" id="1_n82hs"]
 [ext_resource type="PackedScene" uid="uid://db5cx0wekpik6" path="res://scenes/player/player.tscn" id="2_2jon6"]
-[ext_resource type="Texture2D" uid="uid://djx84y4ra573" path="res://art/level/background-middle.png" id="2_i5odb"]
-[ext_resource type="Texture2D" uid="uid://dy76wwgyjkm82" path="res://art/level/background-right.png" id="3_yuda1"]
 [ext_resource type="Script" path="res://scenes/level1/enemys.gd" id="4_0qqb6"]
+[ext_resource type="Texture2D" uid="uid://ctuntokoner2h" path="res://art/GGJ素材/场景/背景图/background-1.png" id="4_jtd5d"]
 [ext_resource type="Texture2D" uid="uid://dr2sqt5v3cqdc" path="res://art/level/wall-c.png" id="4_mpc6m"]
 [ext_resource type="PackedScene" uid="uid://p10m2bbfrblo" path="res://scenes/door/door.tscn" id="5_76cy5"]
+[ext_resource type="Texture2D" uid="uid://ck7x36ij63siu" path="res://art/GGJ素材/场景/地板/Floor-middle-noth.png" id="5_odtfi"]
 [ext_resource type="Texture2D" uid="uid://n636k3g03ymt" path="res://art/level/Floor-c.png" id="5_xkpd7"]
 [ext_resource type="PackedScene" uid="uid://c5871tfq0rn7x" path="res://scenes/bullet/bullet.tscn" id="6_pnppt"]
 [ext_resource type="PackedScene" uid="uid://b5r0wi2cn0gub" path="res://scenes/start_menu/start_menu.tscn" id="9_k7am4"]
+[ext_resource type="Texture2D" uid="uid://4kn0h8683lwa" path="res://art/GGJ素材/子弹/bullet-2.png" id="11_oewt7"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hab6q"]
 radius = 132.501
@@ -21,17 +22,6 @@ z_index = -1
 
 [node name="Obstacle" parent="Obstacles" instance=ExtResource("1_n82hs")]
 
-[node name="Icon" type="Sprite2D" parent="Obstacles/Obstacle"]
-z_index = -3
-position = Vector2(500.25, 388)
-scale = Vector2(0.516406, 0.714815)
-texture = ExtResource("2_i5odb")
-
-[node name="Background-right" type="Sprite2D" parent="Obstacles/Obstacle"]
-position = Vector2(1437, 387)
-scale = Vector2(0.509375, 0.716667)
-texture = ExtResource("3_yuda1")
-
 [node name="Wall-c" type="Sprite2D" parent="Obstacles/Obstacle"]
 z_index = -1
 position = Vector2(42, 444)
@@ -39,13 +29,23 @@ scale = Vector2(1.08108, 1.27037)
 texture = ExtResource("4_mpc6m")
 
 [node name="Floor-c" type="Sprite2D" parent="Obstacles/Obstacle"]
-position = Vector2(925, 928.5)
-scale = Vector2(1.03854, 1.30488)
+position = Vector2(925, 927)
+scale = Vector2(1, 1.33333)
 texture = ExtResource("5_xkpd7")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Obstacles/Obstacle"]
 rotation = 0.00297871
-polygon = PackedVector2Array(160.284, 766.526, -67.7708, 1084.21, -78.0145, -4.76764, 2821.01, -2.40296, 2827.82, 1277.58, -89.169, 1286.27, -65.7827, 1080.2, 2286.27, 1093.19, 2334.29, 764.05)
+polygon = PackedVector2Array(160.284, 766.526, -67.7708, 1084.21, -78.0145, -4.76764, 6254.96, -22.6318, 6352.87, 1288.08, -89.169, 1286.27, -65.7827, 1080.2, 5768.23, 1074.82, 5763.27, 752.836)
+
+[node name="Background-1" type="Sprite2D" parent="Obstacles/Obstacle"]
+z_index = -4
+texture = ExtResource("4_jtd5d")
+offset = Vector2(2880, 540)
+
+[node name="Floor-middle-noth" type="Sprite2D" parent="Obstacles/Obstacle"]
+position = Vector2(3818.5, 947.5)
+scale = Vector2(2.02019, 1.53285)
+texture = ExtResource("5_odtfi")
 
 [node name="Player" parent="." instance=ExtResource("2_2jon6")]
 position = Vector2(612, 896)
@@ -56,10 +56,10 @@ script = ExtResource("4_0qqb6")
 
 [node name="Door" parent="Enemys" node_paths=PackedStringArray("path") instance=ExtResource("5_76cy5")]
 position = Vector2(76, 950)
-wave = 1
+wave = 100000
 target_secene = ExtResource("9_k7am4")
 max_spwan_time = 2.0
-max_spwan_number = 2
+max_spwan_number = 7
 path = NodePath("Path")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Enemys/Door"]
@@ -70,14 +70,46 @@ shape = SubResource("CircleShape2D_hab6q")
 points = PackedVector2Array(205, -77, 654, -83)
 
 [node name="Bullet" parent="." instance=ExtResource("6_pnppt")]
-position = Vector2(942, 918)
+position = Vector2(1144, 932)
 attri = {
-"ap": 1000,
-"atk_speed": 1.0,
+"ap": 20,
+"atk_speed": 0.5,
 "boom_ap": 0,
-"crit_magnification": 1.0,
-"crit_rate": 0.5,
+"crit_magnification": 1.2,
+"crit_rate": 0.1,
 "hitted_cold": false,
 "max_quantity": 5,
-"reload_cd": 2.0
+"name": "",
+"pic": ExtResource("11_oewt7"),
+"reload_cd": 0.7
+}
+
+[node name="Bullet2" parent="." instance=ExtResource("6_pnppt")]
+position = Vector2(2603, 932)
+attri = {
+"ap": 30,
+"atk_speed": 0.4,
+"boom_ap": 0,
+"crit_magnification": 1.3,
+"crit_rate": 0.2,
+"hitted_cold": false,
+"max_quantity": 6,
+"name": "",
+"pic": ExtResource("11_oewt7"),
+"reload_cd": 0.5
+}
+
+[node name="Bullet3" parent="." instance=ExtResource("6_pnppt")]
+position = Vector2(4377, 983)
+attri = {
+"ap": 40,
+"atk_speed": 0.3,
+"boom_ap": 0,
+"crit_magnification": 1.5,
+"crit_rate": 0.4,
+"hitted_cold": false,
+"max_quantity": 6,
+"name": "",
+"pic": ExtResource("11_oewt7"),
+"reload_cd": 0.5
 }

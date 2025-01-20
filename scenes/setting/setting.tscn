@@ -157,6 +157,7 @@ text = "S"
 script = ExtResource("6_t78cv")
 
 [node name="ChangeButtonIcon" type="Button" parent="."]
+process_mode = 4
 layout_mode = 0
 offset_left = 637.0
 offset_top = 805.0

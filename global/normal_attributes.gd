@@ -1,5 +1,7 @@
 extends Node
 
+var score:int
+
 func calculate_health(attacker:EntityAtrributes,target:EntityAtrributes)->Array:
 	var final_atk=(attacker.entity["ap"]-target.entity["defense"])
 	var is_crit:bool
